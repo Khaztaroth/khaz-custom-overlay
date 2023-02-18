@@ -71,7 +71,7 @@ function ChatMessages() {
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
   }, [messages]);
 
   const renderBadge = (badge) => {
@@ -93,7 +93,7 @@ function ChatMessages() {
 
 
   return (
-    <div ref={messagesEndRef}>
+    <div ref={messagesEndRef} style={{ overflowY: 'scroll', height: '100vh' }}>
       {messages.map((message, index) => (
         <div key={index}>
           {message.badges &&
