@@ -1,7 +1,5 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import tmi from 'tmi.js';
-
-import { BadgesContext } from './api-requests/channelBadges';
 
 function ChatMessages() {
   const [messages, setMessages] = useState([]);

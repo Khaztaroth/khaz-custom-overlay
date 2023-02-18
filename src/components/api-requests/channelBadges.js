@@ -12,7 +12,7 @@ export const BadgeProvider = ({ children }) => {
         method: 'GET', 
         headers: { 
             'Content-Type': 'application/json',
-        } 
+        }
     };
 
   useEffect(() => {

@@ -2,7 +2,7 @@
 // import DisplayBadges from "./api-requests/display-badges";
 
 import ChatMessages from "./chatMessages";
-import { BadgeProvider } from "./api-requests/channelBadges";
+import { BadgeProvider } from "./components/api-requests/channelBadges";
 
 import "./App.css"
 
