@@ -13,10 +13,10 @@ export const EmoteProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //console.log('Fetching data...');
+      //console.log('Fetching data...');
         const result = await fetch(url, options);
         const body = await result.json();
-       // console.log('Data received:', body);
+      //console.log('Data received:', body);
         setEmoteData(body);
       } catch (err) {
         console.log(err);
