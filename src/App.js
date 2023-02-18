@@ -1,5 +1,4 @@
 import ChatMessages from "./chatMessages";
-//import DisplayAllEmotes from "./api-requests/fetchChannelEmotes";
 import { EmoteProvider } from "./api-requests/channelEmotes";
 
 import "./App.css"

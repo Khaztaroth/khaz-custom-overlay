@@ -1,3 +1,20 @@
+.chat-container{
+  text-align: left;
+}
+
 .user-message{
-  font: 12
+  font-size: 2vw
+}
+.user-name {
+  font-size: 1.8vw;
+}
+
+.badges {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.badges IMG {
+  width: 1.7vw;
+  margin-right: 0.2vw;
 }

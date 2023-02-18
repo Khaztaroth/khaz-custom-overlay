@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 
 const fetch = require('node-fetch');
 
-const url = 'https://emotes.adamcy.pl/v1/channel/Khaztaroth315/emotes/twitch';
+const url = 'https://emotes.adamcy.pl/v1/channel/khaztaroth315/emotes/twitch';
 const options = { method: 'GET', headers: { 'Content-Type': 'application/json' } };
 
 export const EmoteContext = createContext();
