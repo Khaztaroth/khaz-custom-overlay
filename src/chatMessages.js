@@ -3,11 +3,10 @@ import tmi from 'tmi.js';
 
 function ChatMessages() {
   const [messages, setMessages] = useState([]);
-  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const client = new tmi.Client({
-      channels: ['khaztaroth315']
+      channels: ['criken']
     });
 
     client.connect();
@@ -17,8 +16,6 @@ function ChatMessages() {
       //Ignore messages from the bot itself
       if (self) return;
     
-      console.log(tags)
-
       //Takes the emote data from the message
       const emotes = tags.emotes;
       //Defines the message so it can be used even if there's no emote data to process
@@ -79,6 +76,7 @@ function ChatMessages() {
     };
   }, []);
   
+    const messagesEndRef = useRef(null);
 
   //Defining an effect that will scroll to the latest message
   useEffect(() => {
@@ -100,7 +98,7 @@ function ChatMessages() {
         return <img src='https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/1' alt='vip badge' />;
       case 'bits':
         return <img src='https://static-cdn.jtvnw.net/badges/v1/73b5c3fb-24f9-4a82-a852-2f475b59411c/1' alt='bits badge'/>
-      case 'prime':
+      case 'premium':
         return <img src='https://static-cdn.jtvnw.net/badges/v1/a1dd5073-19c3-4911-8cb4-c464a7bc1510/1' alt='prime badge'/>
       default:
         return null;
