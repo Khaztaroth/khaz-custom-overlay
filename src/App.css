@@ -1,20 +1,56 @@
 :root {
-  overflow: hidden;
+  --purple: #d457f3;
+  --orange: #f4b14f;
 }
-.chat-container{
-  text-align: left;
+#overlayBlock {
+    display:  flex;
+    height: 98vh;
+    font-size: 28pt;
+
+    --angle: 0deg;
+    border: 1vmin solid;
+    border-image: conic-gradient(from var(--angle), var(--purple), var(--orange), var(--purple)) 1;
+    
+    animation: 10s rotate linear infinite;
 }
 
-.user-message{
-  font-size: 26px
+#leftside {
+    flex: 3;
+    --angle: 0deg;
+    border-right: 1vmin solid;
+    border-image: linear-gradient(var(--angle), var(--purple), var(--orange)) 1;
+    
+    animation: 10s rotate linear infinite;
+  }
+
+#webcam {
+    --angle: 0deg;
+    border-top: 1vmin solid;
+    border-image: linear-gradient(var(--angle), var(--purple), var(--orange)) 1;
+    
+    animation: 10s rotate linear infinite;
+  }
+
+#rightside {
+    flex: 14;
 }
-.user-name {
-  font-size: 28px
-}
-.badges IMG {
-  display: inline-flex;
-  align-self: center;
-  justify-self: center;
-  width: 24px;
-  padding: 2px;
-}
+
+#screen {
+    --angle: 0deg;
+    border-bottom: 1vmin solid;
+    border-image: linear-gradient(var(--angle), var(--purple), var(--orange)) 1;
+    
+    animation: 15s rotate linear infinite;
+  }
+  
+@keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+  
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }

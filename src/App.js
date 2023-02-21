@@ -1,18 +1,20 @@
-// import { EmoteProvider } from "./api-requests/channelEmotes";
-// import { BadgeProvider } from "./components/api-requests/channelBadges";
+import React from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
-// import DisplayBadges from "./api-requests/display-badges";
+import ArtOverlay from './components/pages/art_overlay';
+import GamesOverlay from './components/pages/games_overlay';
+import Home from './components/pages/blocks/home';
 
+import "./app.css"
 
-import "./App.css"
-import TmiConnect from "./components/api-requests/tmi-connection";
-
-function App() {
-  return (
-    <div>
-      <TmiConnect />
-    </div>
-  );
+export default function App() {
+    return (
+        <Router>
+            <Routes>
+                <Route exact path='/' element={<Home />}/>
+                <Route exact path='/art' element={<ArtOverlay />}/>
+                <Route exact path='/games' element={<GamesOverlay />}/>
+            </Routes> 
+        </Router>
+    )
 }
-
-export default App

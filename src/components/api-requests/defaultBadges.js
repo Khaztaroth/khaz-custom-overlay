@@ -2,10 +2,10 @@ import React, { createContext, useState, useEffect } from 'react';
 
 const fetch = require('node-fetch');
 
-export function ChannelBadgeProvider (id = '25579349' ) {
-  const [channelBadgeData, setChannelBadgeData] = useState([]);
+export function DefaultBadgeProvider () {
+  const [globalBadgeData, setGlobalBadgeData] = useState([]);
 
-  const APIurl = `https://badges.twitch.tv/v1/badges/channels/${id}/display?language=en`;
+  const APIurl = "https://badges.twitch.tv/v1/badges/global/display?language=en";
     const APIoptions = { 
         method: 'GET', 
         headers: { 
@@ -20,7 +20,7 @@ export function ChannelBadgeProvider (id = '25579349' ) {
         const result = await fetch(APIurl, APIoptions);
         const body = await result.json();
       //console.log('Data received:', body);
-      setChannelBadgeData(body);
+      setGlobalBadgeData(body);
       } catch (err) {
         console.log(err);
       }
@@ -28,9 +28,9 @@ export function ChannelBadgeProvider (id = '25579349' ) {
 
     // call the async fetchData function
     fetchData();
-  }, [id]);
+  }, []);
 
   // console.log('badgeData:', badgeData.badge_sets);
 
-  return channelBadgeData
+  return globalBadgeData
 };

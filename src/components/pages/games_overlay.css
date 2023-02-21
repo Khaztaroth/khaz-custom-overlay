@@ -1,0 +1,25 @@
+:root {
+    background-color: transparent;
+}
+
+body {
+    margin: 0;
+}
+
+.chat {
+    display: inline-block;
+    width: 100%;
+    height: 72vh;
+}
+
+.webcam {
+    display: inline-block;
+    width: 100%;
+    height: 22vh;
+}
+
+.screen {
+    display: inline-block;
+    width: 100%;
+    height: 79.6vh;
+}
