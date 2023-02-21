@@ -22,5 +22,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Irrelevant files
 .env
-_old-code.txt
+__old-code.txt
+src/components/json-tests/
+src/components/json-tests/*
