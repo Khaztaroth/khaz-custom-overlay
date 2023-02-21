@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import tmi from 'tmi.js';
 
-import { UserName } from "../message-parts/username";
-import { ReplaceEmotes } from "../message-parts/insertEmotes";
-import { DisplayBadges } from "../message-parts/badges";
+import { DisplayName } from "../message-parts/Display-name";
+import { DisplayEmotes } from "../message-parts/Display-emotes";
+import { DisplayBadges } from "../message-parts/Display-badges";
 
 function TmiConnect () {
     const [messages, setMessages] = useState([]);
 
-
+    //Calling useEffect to separate the message into elements that can be called individually
     useEffect(() => {
         const client = new tmi.Client({
             channels: ['criken'],
@@ -17,6 +17,7 @@ function TmiConnect () {
     
         client.connect();
 
+        //setting constant to handle the message so it's only called once
         const onMessageHandler = (channel, message, userState, self) => {
             if (self) return;
             let messageWithEmotes = userState;
@@ -32,13 +33,14 @@ function TmiConnect () {
                 }
             ]);
         };
+        //calling the message handler
         client.on("message", onMessageHandler);
 
         return () => {
+            //dismounting the message handler to avoid memory leaks
             client.off("message", onMessageHandler);
         }
    }, []);
-
 
 
   //Defining an effect that will scroll to the latest message
@@ -47,19 +49,17 @@ function TmiConnect () {
     messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
   }, [messages]);
 
-  console.log(messages.emotes)
+  //Message formatter, each element handles its segment through prop calls
         return (
             <div ref={messagesEndRef} style={{ overflowY: 'scroll', height: '100vh' }}>
                 {messages.map((message, index) => (
                 <div key={index}>
                     <DisplayBadges badges={message.badges}/>
-                    <UserName user={message.username} color={message.color}/>
-                    <ReplaceEmotes emotes={message.emotes} message={message.message}/>
+                    <DisplayName user={message.username} color={message.color}/>
+                    <DisplayEmotes emotes={message.emotes} message={message.message}/>
                 </div> ))}
             </div>
         )
                 }
-
-
 
 export default TmiConnect 

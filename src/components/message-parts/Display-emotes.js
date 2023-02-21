@@ -1,5 +1,5 @@
 
-export function ReplaceEmotes(props){
+export function DisplayEmotes(props){
     //Processes the emote IDs that come from the "tags" array
     
     let messageWithEmotes = props.message
