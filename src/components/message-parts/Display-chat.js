@@ -17,9 +17,9 @@ import { UseTMI } from "../api-requests/tmi-connection";
 
   //Message formatter, each element handles its segment through prop calls
         return (
-            <div ref={messagesEndRef} style={{ overflowY: 'scroll', height: '100vh' }}>
+            <div ref={messagesEndRef} style={{ overflowY: 'scroll', height: '717px' }}>
                 {messages.map((message, index) => (
-                <div key={index}>
+                <div key={index} className="message">
                     <DisplayBadges badges={message.badges}/>
                     <DisplayName user={message.username} color={message.color}/>
                     <DisplayEmotes emotes={message.emotes} message={message.message}/>
