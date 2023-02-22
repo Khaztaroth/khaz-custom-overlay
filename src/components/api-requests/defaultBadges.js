@@ -1,26 +1,25 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const fetch = require('node-fetch');
+export async function DefaultBadgeProvider () {
+  const [badgeData, setBadgeData] = useState([]);
 
-export function DefaultBadgeProvider () {
-  const [globalBadgeData, setGlobalBadgeData] = useState([]);
-
-  const APIurl = "https://badges.twitch.tv/v1/badges/global/display?language=en";
+  useEffect(() => {
+    const APIurl = "https://badges.twitch.tv/v1/badges/global/display?language=en";
     const APIoptions = { 
         method: 'GET', 
         headers: { 
             'Content-Type': 'application/json',
+            'Client-ID': '7utx5mqq59gavm5g64oekaq0iuxuyc'
         }
     };
 
-  useEffect(() => {
     const fetchData = async () => {
       try {
-      //console.log('Fetching data...');
+      console.log('Fetching data...');
         const result = await fetch(APIurl, APIoptions);
         const body = await result.json();
-      //console.log('Data received:', body);
-      setGlobalBadgeData(body);
+      console.log('Data received:', body);
+      setBadgeData(body);
       } catch (err) {
         console.log(err);
       }
@@ -32,5 +31,5 @@ export function DefaultBadgeProvider () {
 
   // console.log('badgeData:', badgeData.badge_sets);
 
-  return globalBadgeData
+  return badgeData
 };

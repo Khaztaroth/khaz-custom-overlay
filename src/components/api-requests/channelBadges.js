@@ -1,36 +1,27 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const fetch = require('node-fetch');
-
-export function ChannelBadgeProvider (id = '25579349' ) {
-  const [channelBadgeData, setChannelBadgeData] = useState([]);
-
-  const APIurl = `https://badges.twitch.tv/v1/badges/channels/${id}/display?language=en`;
-    const APIoptions = { 
-        method: 'GET', 
-        headers: { 
-            'Content-Type': 'application/json',
-        }
-    };
+export async function ChannelBadgeProvider(id) {
+  const [badgeData, setBadgeData] = useState([]);
 
   useEffect(() => {
+    const APIurl = `https://badges.twitch.tv/v1/badges/channels/25579349/display?language=en`;
+    const APIoptions = { method: 'GET' };
+
     const fetchData = async () => {
       try {
-      //console.log('Fetching data...');
+        console.log('Fetching data...');
         const result = await fetch(APIurl, APIoptions);
         const body = await result.json();
-      //console.log('Data received:', body);
-      setChannelBadgeData(body);
+        console.log('Data received:', body);
+        setBadgeData(body);
       } catch (err) {
         console.log(err);
       }
     };
 
-    // call the async fetchData function
     fetchData();
   }, [id]);
 
-  // console.log('badgeData:', badgeData.badge_sets);
-
-  return channelBadgeData
-};
+  // wrap the badgeData in a React fragment before returning it
+  return badgeData
+}

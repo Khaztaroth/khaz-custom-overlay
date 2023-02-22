@@ -3,11 +3,12 @@ import { DisplayBadges } from "./Display-badges";
 import { DisplayEmotes } from "./Display-emotes";
 import { DisplayName } from "./Display-name";
 
- import { UseTMI } from "../api-requests/tmi-connection";
+import { UseTMI } from "../api-requests/tmi-connection";
 
  export function DisplayChat() {
-    const messages = UseTMI('onsta')
+    const messages = UseTMI('rebeckeronie')
 
+    
    //Defining an effect that will scroll to the latest message
   const messagesEndRef = useRef(null);
   useEffect(() => {
