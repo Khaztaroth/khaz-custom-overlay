@@ -6,7 +6,9 @@ import { UserInfoProvider } from "../api-requests/userInfo";
 
 import { UseTMI } from "../api-requests/tmi-connection";
 
-const channel = 'icysylvie'
+const params = new URLSearchParams(window.location.search)
+
+const channel = params.get('channel' || 'khaztaroth315')
 
 export function DisplayChat() {
     UserInfoProvider(channel);

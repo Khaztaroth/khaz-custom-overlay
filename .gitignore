@@ -30,3 +30,4 @@ src/components/json-tests/*
 src/components/api-requests/channelBadges.js
 src/components/api-requests/channelEmotes.js
 src/components/api-requests/defaultBadges.js
+.gcloudignore

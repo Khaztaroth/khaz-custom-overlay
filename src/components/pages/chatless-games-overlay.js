@@ -1,20 +1,19 @@
 import React from "react";
 
-import './art_overlay.css'
-import { DisplayChat } from "../message-parts/Display-chat";
+import './games_overlay.css'
 
-function ArtOverlay() {
+function ChatlessGamesOverlay() {
     return (
         <>
             <div id='overlayBlock' className='block'>
             
             <div id="leftside">
-                {<DisplayChat />}
+                <div className="chatBox" id="chatBox"></div>
                 <div className="webcam" id="webcam">
            </div>
             </div>
             <div id="rightside">
-                <div className="art_screen" id="screen"></div>
+                <div className="screen" id="screen"></div>
             </div>
         
             </div>
@@ -24,4 +23,4 @@ function ArtOverlay() {
 
 }
 
-export default ArtOverlay
+export default ChatlessGamesOverlay
