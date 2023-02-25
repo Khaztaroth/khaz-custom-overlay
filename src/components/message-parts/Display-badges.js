@@ -1,8 +1,13 @@
+import { useEffect, useState } from "react";
+
 export function DisplayBadges(props) {
   const CHANNEL_URL = `https://badges.twitch.tv/v1/badges/channels/${props.id}/display?language=en`;
   const DEFAULT_URL = 'https://badges.twitch.tv/v1/badges/global/display?language=en';
   const CHANNEL_DATA_KEY = 'ChannelData';
   const DEFAULT_DATA_KEY = 'DefaultData';
+
+  const [channelBadgeData, setChannelBadgeData] = useState(null);
+  const [defaultBadgeData, setDefaultBadgeData] = useState(null);
   
   const fetchData = async (url, key) => {
     try {
@@ -12,63 +17,50 @@ export function DisplayBadges(props) {
       console.error(`Error fetching data from ${url}: ${error}`);
     }
   }
-  
-  const getCachedData = (key) => {
-    const dataStringified = localStorage.getItem(key);
-    return dataStringified ? JSON.parse(dataStringified) : null;
-  }
-  
-  const updateData = () => {
-    fetchData(CHANNEL_URL, CHANNEL_DATA_KEY);
-    fetchData(DEFAULT_URL, DEFAULT_DATA_KEY);
-    setTimeout(updateData, 1000 * 60 * 60 * 4);
-  }
-  
-  const init = () => {
-    const cachedChannelData = getCachedData(CHANNEL_DATA_KEY);
-    const cachedDefaultData = getCachedData(DEFAULT_DATA_KEY);
+
+  useEffect(() => {
+    const cachedChannelData = JSON.parse(localStorage.getItem(CHANNEL_DATA_KEY));
+    const cachedDefaultData = JSON.parse(localStorage.getItem(DEFAULT_DATA_KEY));
 
     if (cachedChannelData == null) {
       fetchData(CHANNEL_URL, CHANNEL_DATA_KEY);
+    } else {
+      setChannelBadgeData(cachedChannelData.response);
     }
-  
+
     if (cachedDefaultData == null) {
       fetchData(DEFAULT_URL, DEFAULT_DATA_KEY);
+    } else {
+      setDefaultBadgeData(cachedDefaultData.response);
     }
-  
-    setTimeout(updateData, 1000 * 60 * 60 * 4);
+
+    const intervalId = setInterval(() => {
+      fetchData(CHANNEL_URL, CHANNEL_DATA_KEY);
+      fetchData(DEFAULT_URL, DEFAULT_DATA_KEY);
+    }, 1000 * 60 * 60 * 4);
+
+    return () => clearInterval(intervalId);
+  }, [CHANNEL_URL, DEFAULT_URL]);
+
+  if (!channelBadgeData || !defaultBadgeData) {
+    return null;
   }
-  
-  init();
-  
-  
-  // const localChannelBadgeData = require('../json-tests/channelBadgeData.json')
-  // const localDefaultBadgeData = require('../json-tests/defaultBadgeData.json') 
 
-  const localChannelBadgeData = JSON.parse(localStorage.getItem(CHANNEL_DATA_KEY))
-  const localDefaultBadgeData = JSON.parse(localStorage.getItem(DEFAULT_DATA_KEY))
-
-  const cachedChannelBadgeData = localChannelBadgeData.response
-  const cachedDefaultBadgeData = localDefaultBadgeData.response
-
-  console.log("cachedChannelBadgeData:", cachedChannelBadgeData);
-  console.log("cachedDefaultBadgeData:", cachedDefaultBadgeData);
-  
   const renderBadge = (key, value) => {
     let badgeSet;
-  
+
     const priorityKeys = ['subscriber', 'bits'];
     for (const priorityKey of priorityKeys) {
-      if (key === priorityKey && cachedChannelBadgeData && cachedChannelBadgeData.badge_sets[priorityKey]) {
-        badgeSet = cachedChannelBadgeData.badge_sets[priorityKey];
+      if (key === priorityKey && channelBadgeData.badge_sets[priorityKey]) {
+        badgeSet = channelBadgeData.badge_sets[priorityKey];
         break;
       }
     }
-    
-    if (!badgeSet && cachedDefaultBadgeData && cachedDefaultBadgeData.badge_sets[key]) {
-      badgeSet = cachedDefaultBadgeData.badge_sets[key];
+
+    if (!badgeSet && defaultBadgeData.badge_sets[key]) {
+      badgeSet = defaultBadgeData.badge_sets[key];
     }
-  
+
     if (badgeSet && badgeSet.versions[value]) {
       const imageUrl = badgeSet.versions[value].image_url_2x || badgeSet.versions[value].image_url_3x || badgeSet.versions[value].image_url_4x;
       return <img src={imageUrl} alt={`${key} badge`} />;
