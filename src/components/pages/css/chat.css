@@ -1,0 +1,33 @@
+::-webkit-scrollbar{
+    display: none;
+}
+img {
+    width: 0.8vw;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+.message {
+    font-size: 1.7vh;
+    word-wrap: break-word;
+    word-break: break-word;
+    align-self: center;
+    width: 100%;
+    margin-bottom: 0.4vh;
+    margin-left: 0.35vh;
+    padding: 0.4vh;
+    background-color: rgba(255, 255, 255, 0.144);
+    border: 10%;
+}
+
+.message img {
+    width: 1.8vh;
+    padding-right: 0.3vw;
+}
+
+.user-message {
+    mix-blend-mode: difference;
+    color: rgb(255, 255, 255);
+}
+.user-message img {
+    width: 2.3vh;
+}

@@ -2,6 +2,9 @@
   --purple: #d457f3;
   --orange: #f4b14f;
 }
+body{
+  background-color: transparent;
+}
 
 #overlayBlock {
     display:  flex;

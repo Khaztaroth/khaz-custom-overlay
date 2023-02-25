@@ -1,6 +1,7 @@
 import React from "react";
 import { DisplayChat } from "../message-parts/Display-chat";
-import './games_overlay.css'
+
+// import './css/games_overlay.css'
 
 function GamesOverlay() {
     return (

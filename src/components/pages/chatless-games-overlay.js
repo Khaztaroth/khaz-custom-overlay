@@ -1,6 +1,6 @@
 import React from "react";
 
-import './games_overlay.css'
+// import './css/games_overlay.css'
 
 function ChatlessGamesOverlay() {
     return (

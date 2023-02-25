@@ -1,6 +1,6 @@
 import React from "react";
 
-import './art_overlay.css'
+// import './css/art_overlay.css'
 
 function ChatlessArtOverlay() {
     return (

@@ -1,6 +1,7 @@
 import React from "react";
 
-import './art_overlay.css'
+// import './css/art_overlay.css'
+
 import { DisplayChat } from "../message-parts/Display-chat";
 
 function ArtOverlay() {
@@ -9,7 +10,7 @@ function ArtOverlay() {
             <div id='overlayBlock' className='block'>
             
             <div id="leftside">
-                {<DisplayChat />}
+                <div className="chatBox" id="chatBox">{<DisplayChat />}</div>
                 <div className="webcam" id="webcam">
            </div>
             </div>
