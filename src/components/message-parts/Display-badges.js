@@ -1,5 +1,5 @@
 export function DisplayBadges(props) {
-  const CHANNEL_URL = 'https://badges.twitch.tv/v1/badges/channels/25579349/display?language=en';
+  const CHANNEL_URL = `https://badges.twitch.tv/v1/badges/channels/${props.id}/display?language=en`;
   const DEFAULT_URL = 'https://badges.twitch.tv/v1/badges/global/display?language=en';
   const CHANNEL_DATA_KEY = 'ChannelData';
   const DEFAULT_DATA_KEY = 'DefaultData';
@@ -28,11 +28,11 @@ export function DisplayBadges(props) {
     const cachedChannelData = getCachedData(CHANNEL_DATA_KEY);
     const cachedDefaultData = getCachedData(DEFAULT_DATA_KEY);
 
-    if (cachedChannelData.lenght < 0) {
+    if (cachedChannelData == null) {
       fetchData(CHANNEL_URL, CHANNEL_DATA_KEY);
     }
   
-    if (cachedDefaultData.lenght < 0) {
+    if (cachedDefaultData == null) {
       fetchData(DEFAULT_URL, DEFAULT_DATA_KEY);
     }
   
@@ -51,8 +51,8 @@ export function DisplayBadges(props) {
   const cachedChannelBadgeData = localChannelBadgeData.response
   const cachedDefaultBadgeData = localDefaultBadgeData.response
 
-  // console.log("cachedChannelBadgeData:", cachedChannelBadgeData);
-  // console.log("cachedDefaultBadgeData:", cachedDefaultBadgeData);
+  console.log("cachedChannelBadgeData:", cachedChannelBadgeData);
+  console.log("cachedDefaultBadgeData:", cachedDefaultBadgeData);
   
   const renderBadge = (key, value) => {
     let badgeSet;
@@ -65,8 +65,6 @@ export function DisplayBadges(props) {
       }
     }
     
-    // console.log(badgeSet)
-
     if (!badgeSet && cachedDefaultBadgeData && cachedDefaultBadgeData.badge_sets[key]) {
       badgeSet = cachedDefaultBadgeData.badge_sets[key];
     }

@@ -2,12 +2,18 @@ import { useEffect, useRef } from "react";
 import { DisplayBadges } from "./Display-badges";
 import { DisplayEmotes } from "./Display-emotes";
 import { DisplayName } from "./Display-name";
+import { UserInfoProvider } from "../api-requests/userInfo";
 
 import { UseTMI } from "../api-requests/tmi-connection";
 
- export function DisplayChat() {
-    const messages = UseTMI('icysylvie')
+const channel = 'icysylvie'
 
+export function DisplayChat() {
+    UserInfoProvider(channel);
+    const messages = UseTMI(channel);
+    
+    const userID = localStorage.getItem("userID")
+    // console.log(messages)
     
    //Defining an effect that will scroll to the latest message
   const messagesEndRef = useRef(null);
@@ -20,7 +26,7 @@ import { UseTMI } from "../api-requests/tmi-connection";
             <div ref={messagesEndRef} style={{ overflowY: 'scroll', height: '717px' }}>
                 {messages.map((message, index) => (
                 <div key={index} className="message">
-                    <DisplayBadges badges={message.badges}/>
+                    <DisplayBadges badges={message.badges} id={userID}/>
                     <DisplayName user={message.username} color={message.color}/>
                     <DisplayEmotes emotes={message.emotes} message={message.message}/>
                 </div> ))}
