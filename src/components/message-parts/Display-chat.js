@@ -6,7 +6,7 @@ import { DisplayName } from "./Display-name";
 import { UseTMI } from "../api-requests/tmi-connection";
 
  export function DisplayChat() {
-    const messages = UseTMI('rebeckeronie')
+    const messages = UseTMI('icysylvie')
 
     
    //Defining an effect that will scroll to the latest message
