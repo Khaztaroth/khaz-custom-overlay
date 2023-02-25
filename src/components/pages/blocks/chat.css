@@ -8,17 +8,15 @@ img {
     margin-bottom: 5px;
 }
 
-#chat {
-    font-size: 1.3vw;
-    /* background-image: linear-gradient(rgba(0, 0, 0, 0.349), rgba(0, 0, 0, 0)); */
-}
 .message {
+    font-size: 0.6em;
     word-wrap: break-word;
     word-break: break-word;
-    width: 96%;
+    width: 90%;
     margin-bottom: 10px;
     margin-left: 6px;
-    background-color: rgba(0, 0, 0, 0.096);
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.199);
 }
 
 .user-message img {

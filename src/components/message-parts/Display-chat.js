@@ -29,7 +29,7 @@ export function DisplayChat() {
                 {messages.map((message, index) => (
                 <div key={index} className="message">
                     <DisplayBadges badges={message.badges} id={userID}/>
-                    <DisplayName user={message.username} color={message.color}/>
+                    <DisplayName user={message.username} color={message.color} style={{ color: 'white' }}/>
                     <DisplayEmotes emotes={message.emotes} message={message.message}/>
                 </div> ))}
             </div>

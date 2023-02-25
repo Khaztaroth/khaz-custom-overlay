@@ -40,5 +40,5 @@ export function DisplayEmotes(props){
 
 
 
-    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}}></span>
+    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style={{ color: 'white' }}></span>
 }
