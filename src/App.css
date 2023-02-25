@@ -3,9 +3,6 @@
   --orange: #f4b14f;
 }
 
-body {
-  background-color: black;
-}
 #overlayBlock {
     display:  flex;
     height: 98vh;
