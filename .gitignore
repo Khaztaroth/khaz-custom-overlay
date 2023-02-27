@@ -24,6 +24,7 @@ yarn-error.log*
 
 # Irrelevant files
 .env
+_back
 __old-code.txt
 src/components/json-tests/
 src/components/json-tests/*
