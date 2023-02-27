@@ -7,7 +7,7 @@ img {
     margin-bottom: 5px;
 }
 .message {
-    font-size: 1.7vh;
+    font-size: 1.8vh;
     word-wrap: break-word;
     word-break: break-word;
     align-self: center;
@@ -15,7 +15,7 @@ img {
     margin-bottom: 0.4vh;
     margin-left: 0.35vh;
     padding: 0.4vh;
-    background-color: rgba(255, 255, 255, 0.144);
+    background-color: rgba(22, 22, 22, 0.753);
     border: 10%;
 }
 
