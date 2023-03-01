@@ -4,11 +4,14 @@ import tmi from 'tmi.js';
 export function UseTMI (channel) {
     const [messages, setMessages] = useState([]);
 
+    
     //Calling useEffect to separate the message into elements that can be called individually
     useEffect(() => {
+        const cliendID = process.env.REACT_APP_BOT_CLIENT_ID;
+        
         const client = new tmi.Client({
             channels: [channel],
-            clientid: '7utx5mqq59gavm5g64oekaq0iuxuyc'
+            clientid: cliendID
         })
     
         client.connect();
