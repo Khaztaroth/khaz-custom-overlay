@@ -7,10 +7,6 @@ body{
 }
 
 #overlayBlock {
-    display:  flex;
-    height: 98vh;
-    font-size: 28pt;
-
     --angle: 0deg;
     border: 1vmin solid;
     border-image: conic-gradient(from var(--angle), var(--purple), var(--orange), var(--purple)) 1;
