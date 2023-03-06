@@ -25,7 +25,7 @@ export function DisplayChat() {
 
   //Message formatter, each element handles its segment through prop calls
         return (
-            <div ref={messagesEndRef} style={{ overflowY: 'scroll', height: '100vh', position:'relative', zIndex: '1'}}>
+            <div ref={messagesEndRef} style={{ overflowY: 'scroll', height: '100%', position:'relative', zIndex: '1'}}>
                 {messages.map((message, index) => (
                 <div key={index} className="message">
                     <DisplayBadges badges={message.badges} id={userID}/>
