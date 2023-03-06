@@ -2,9 +2,14 @@
     display: none;
 }
 img {
-    width: 0.8vw;
+    width: 1em;
     vertical-align: middle;
     margin-bottom: 5px;
+}
+.chat {
+    overflow-y: scroll;
+    height: 100vh;
+    z-index: 1;
 }
 .message {
     font-size: large;
@@ -21,12 +26,14 @@ img {
 }
 
 .message img {
-    width: 1.8vh;
+    width: 1em;
     padding-right: 0.3vw;
 }
 
-.user-message {
+.user-name{
     mix-blend-mode: difference;
+}
+.user-message {
     color: rgb(255, 255, 255);
 }
 .user-message img {

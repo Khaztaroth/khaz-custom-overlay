@@ -6,7 +6,11 @@
 
     display:  flex;
 }
-
+#chatContainer {
+    overflow-y: scroll;
+    height: 100%;
+    z-index: 1;
+}
 .chatBox {
     position: relative;
     display: inline-block;
