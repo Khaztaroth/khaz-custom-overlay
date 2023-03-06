@@ -1,5 +1,5 @@
 export default function Home(){
     return (
-            <p>You might want to navigate to "/chat"</p>
+            <p>Navigate to "/chat?channelname=(CHANNEL)", no parenthesis, to use the standalone chat tool</p>
     )
 }

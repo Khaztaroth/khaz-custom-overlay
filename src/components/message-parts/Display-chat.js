@@ -8,7 +8,7 @@ import { UseTMI } from "../api-requests/tmi-connection";
 
 const params = new URLSearchParams(window.location.search)
 
-const channel = params.get('channel' || 'khaztaroth315')
+const channel = params.get('channel')
 
 export function DisplayChat() {
     UserInfoProvider(channel);
@@ -25,7 +25,7 @@ export function DisplayChat() {
 
   //Message formatter, each element handles its segment through prop calls
         return (
-            <div ref={messagesEndRef} style={{ overflowY: 'scroll', height: '72vh'}}>
+            <div ref={messagesEndRef} style={{ overflowY: 'scroll', height: '100vh', position:'relative', zIndex: '1'}}>
                 {messages.map((message, index) => (
                 <div key={index} className="message">
                     <DisplayBadges badges={message.badges} id={userID}/>
