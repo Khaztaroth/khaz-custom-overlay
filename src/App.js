@@ -1,16 +1,16 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
-import ArtOverlay from './components/pages/art_overlay';
-import GamesOverlay from './components/pages/games_overlay';
-import Home from './components/pages/home';
-import Chat from './components/pages/standalone-chat';
+import ArtOverlay from './components/pages/segments/art_overlay';
+import GamesOverlay from './components/pages/segments/games_overlay';
+import Home from './components/pages/segments/home';
+import Chat from './components/pages/segments/standalone-chat';
 
 import "./components/pages/css/margins.css"
 import "./components/pages/css/blocks.css"
 
-import ChatlessArtOverlay from './components/pages/chatless-art-overlay';
-import ChatlessGamesOverlay from './components/pages/chatless-games-overlay';
+import ChatlessArtOverlay from './components/pages/segments/chatless-art-overlay';
+import ChatlessGamesOverlay from './components/pages/segments/chatless-games-overlay';
 
 export default function App() {
     return (

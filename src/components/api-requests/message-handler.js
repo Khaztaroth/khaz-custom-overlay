@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import tmi from 'tmi.js';
 
-export function UseTMI (channel) {
+export function UseMessages (channel) {
     const [messages, setMessages] = useState([]);
 
     

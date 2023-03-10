@@ -2,7 +2,7 @@ import React from "react";
 
 // import './css/art_overlay.css'
 
-import { DisplayChat } from "../message-parts/Display-chat";
+import { DisplayChat } from "../chat-formatting";
 
 function ArtOverlay() {
     return (

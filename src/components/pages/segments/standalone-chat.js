@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './css/chat.css'
+import '../css/chat.css'
 
-import { DisplayChat } from '../message-parts/Display-chat';
+import { DisplayChat } from '../chat-formatting';
 function Chat() {
     
     return (

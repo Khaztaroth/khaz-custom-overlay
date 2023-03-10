@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
-import { DisplayBadges } from "./Display-badges";
-import { DisplayEmotes } from "./Display-emotes";
-import { DisplayName } from "./Display-name";
+import { DisplayBadges } from "../message-parts/Display-badges";
+import { DisplayEmotes } from "../message-parts/Display-emotes";
+import { DisplayName } from "../message-parts/Display-name";
 import { UserInfoProvider } from "../api-requests/userInfo";
 
-import { UseTMI } from "../api-requests/tmi-connection";
+import { UseMessages } from "../api-requests/message-handler";
 
 const params = new URLSearchParams(window.location.search)
 
@@ -12,9 +12,9 @@ const channel = params.get('channel')
 
 export function DisplayChat() {
     UserInfoProvider(channel);
-    const messages = UseTMI(channel);
-    
-    const userID = localStorage.getItem("userID")
+    const messages = UseMessages(channel);
+
+     const userID = localStorage.getItem("userID")
     // console.log(messages)
     
 //Defining an effect that will scroll to the latest message
