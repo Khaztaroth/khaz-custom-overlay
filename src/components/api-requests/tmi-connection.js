@@ -24,6 +24,7 @@ export function UseTMI (channel) {
                 ...prevMessages,
                 {
                   id: message.id,
+                  userId: message['user-id'],
                   emotes: message.emotes,
                   badges: message.badges,
                   color: message['color'],
@@ -32,12 +33,35 @@ export function UseTMI (channel) {
                 }
             ]);
         };
+
+        const onDeletedMessage = (channel, username, deletedMessage, userstate) => {
+            setMessages((prevMessages) => {
+              return prevMessages.filter((msg) => {
+                return msg.id !== userstate["target-msg-id"];
+              });
+            });
+          };
+
+        const onUserTimeout = (channel, username, reason, duration, userState) => {
+            console.log("Timed out user:", username);
+            console.log("Timed out user ID:", userState["target-user-id"]);
+            setMessages((prevMessages) => {
+                return prevMessages.filter((usr) => {
+                    return usr.userId !== userState["target-user-id"]
+                });
+            });
+        };
+          
         //calling the message handler
         client.on("message", onMessageHandler);
-
+        client.on("messagedeleted", onDeletedMessage);
+        client.on("timeout", onUserTimeout)
+        
         return () => {
             //dismounting the message handler to avoid memory leaks
             client.off("message", onMessageHandler);
+            client.off("messagedeleted", onDeletedMessage);
+            client.off("timeout", onUserTimeout)
         }
    }, [channel]);
 
