@@ -43,8 +43,6 @@ export function UseTMI (channel) {
           };
 
         const onUserTimeout = (channel, username, reason, duration, userState) => {
-            console.log("Timed out user:", username);
-            console.log("Timed out user ID:", userState["target-user-id"]);
             setMessages((prevMessages) => {
                 return prevMessages.filter((usr) => {
                     return usr.userId !== userState["target-user-id"]
