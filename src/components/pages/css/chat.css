@@ -8,7 +8,7 @@ img {
 }
 .chat {
     overflow-y: scroll;
-    height: 100vh;
+    height: 98.5vh;
     z-index: 1;
 }
 .message {
@@ -16,7 +16,7 @@ img {
     word-wrap: break-word;
     word-break: break-word;
 
-    width: 98.3%;
+    width: 100%;
     margin-bottom: 0.3em;
     margin-left: 0.3em;
     padding: 0.35em;

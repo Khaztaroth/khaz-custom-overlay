@@ -7,11 +7,13 @@ function ChatlessArtOverlay() {
         <>
             <div id='overlayBlock' className='block'>
             
-            <div id="leftside"><div className="webcam" id="webcam">
+            <div id="leftside" className="default">
+                <div id="chatBox" className="default" ></div>
+                <div id="webcam" className="default">
            </div>
             </div>
-            <div id="rightside">
-                <div className="art_screen" id="screen"></div>
+            <div id="rightside" className="default">
+                <div id="screen" className="default"></div>
             </div>
         
             </div>
