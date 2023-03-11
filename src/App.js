@@ -6,7 +6,7 @@ import GamesOverlay from './components/pages/segments/games_overlay';
 import Home from './components/pages/segments/home';
 import Chat from './components/pages/segments/standalone-chat';
 
-import "./components/pages/css/margins.css"
+import "./components/pages/css/gradients.css"
 import "./components/pages/css/blocks.css"
 
 import ChatlessArtOverlay from './components/pages/segments/chatless-art-overlay';

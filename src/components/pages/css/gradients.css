@@ -1,0 +1,33 @@
+:root {
+  --purple: #d457f3;
+  --orange: #f4b14f;
+}
+body{
+  background-color: transparent;
+}
+
+.block {
+    --angle: 0deg;
+    border-image: conic-gradient(from var(--angle), var(--purple), var(--orange), var(--purple)) 1;
+
+    animation: 10s rotate linear infinite;
+}
+
+.default {
+  --angle: 0deg;
+  border-image: linear-gradient(var(--angle), var(--purple), var(--orange)) 1;
+  
+  animation: 10s rotate linear infinite;
+}
+
+@keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+  
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
