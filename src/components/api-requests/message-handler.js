@@ -17,23 +17,30 @@ export function UseMessages (channel) {
         client.connect();
 
         //setting constant to handle the message so it's only called once
-        const onMessageHandler = (channel, message, userState, self) => {
+        //passing message and user info to the handlers
+        const onMessageHandler = (channel, userstate, message, self) => {
+
             if (self) return;
-            let messageWithEmotes = userState;
+            let messageWithEmotes = message;
             setMessages((prevMessages) => [
                 ...prevMessages,
                 {
+                  channelId: userstate['room-id'],
+
                   id: message.id,
-                  userId: message['user-id'],
-                  emotes: message.emotes,
-                  badges: message.badges,
-                  color: message['color'],
-                  username: message['display-name'],
-                  message: messageWithEmotes
+                  emotes: userstate.emotes,
+                  message: messageWithEmotes,
+                  type: userstate['message-type'],
+
+                  userId: userstate['user-id'],
+                  badges: userstate.badges,
+                  color: userstate['color'],
+                  username: userstate['display-name'],
                 }
             ]);
         };
 
+        //Remove message by filtering the message id 
         const onDeletedMessage = (channel, username, deletedMessage, userstate) => {
             setMessages((prevMessages) => {
               return prevMessages.filter((msg) => {
@@ -42,6 +49,7 @@ export function UseMessages (channel) {
             });
           };
 
+        //Remove messages by filtering the user id
         const onUserTimeout = (channel, username, reason, duration, userState) => {
             setMessages((prevMessages) => {
                 return prevMessages.filter((usr) => {
@@ -49,17 +57,25 @@ export function UseMessages (channel) {
                 });
             });
         };
+        //Removes messages by emptying the array (it causes an error to pop-up but I don't care)
+        const onClearChat = (channel) => {
+            setMessages((prevMessages) => {
+                return prevMessages = []
+            })
+        }
           
         //calling the message handler
         client.on("message", onMessageHandler);
         client.on("messagedeleted", onDeletedMessage);
         client.on("timeout", onUserTimeout)
+        client.on("clearchat", onClearChat)
         
         return () => {
             //dismounting the message handler to avoid memory leaks
             client.off("message", onMessageHandler);
             client.off("messagedeleted", onDeletedMessage);
             client.off("timeout", onUserTimeout)
+            client.off("clearchat", onClearChat)
         }
    }, [channel]);
 

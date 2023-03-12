@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 
 export function DisplayBadges(props) {
+
+  //setting constants to use for the fetch call
   const CHANNEL_URL = `https://badges.twitch.tv/v1/badges/channels/${props.id}/display?language=en`;
   const DEFAULT_URL = 'https://badges.twitch.tv/v1/badges/global/display?language=en';
   const CHANNEL_DATA_KEY = 'ChannelData';
   const DEFAULT_DATA_KEY = 'DefaultData';
 
+  //setting badge data to be null at first, used to avoid not fetching it on first launch
   const [channelBadgeData, setChannelBadgeData] = useState(null);
   const [defaultBadgeData, setDefaultBadgeData] = useState(null);
   
+  //fetch constant to get the data
   const fetchData = async (url, key) => {
     try {
       const response = await fetch(url);
@@ -17,7 +21,8 @@ export function DisplayBadges(props) {
       console.error(`Error fetching data from ${url}: ${error}`);
     }
   }
-
+  
+  //checking if the data is there, if not, fetch it
   useEffect(() => {
     const cachedChannelData = JSON.parse(localStorage.getItem(CHANNEL_DATA_KEY));
     const cachedDefaultData = JSON.parse(localStorage.getItem(DEFAULT_DATA_KEY));
@@ -46,6 +51,7 @@ export function DisplayBadges(props) {
     return null;
   }
 
+  //Rendering the badges by checking which one it is, then inserting an img segment
   const renderBadge = (key, value) => {
     let badgeSet;
 
@@ -69,6 +75,7 @@ export function DisplayBadges(props) {
     }
   };
 
+  //rendering the badges, if there's any
   return (
     <span>
       {props.badges && Object.entries(props.badges).map(([key, value]) => (

@@ -1,11 +1,20 @@
+import { useEffect, useState } from "react";
 
 export function DisplayEmotes(props){
     //Processes the emote IDs that come from the "tags" array
     
+    //setting the message value to be the same as gotten from TMI to avoid printing nothing if there's no emotes
     let messageWithEmotes = props.message
+
+    //Checking if message type is an action, for formatting reasons
+    const [action, setAction] = useState(false)
+    useEffect(() => {
+      if (props.type === 'action') {
+        setAction(true);
+      }
+    }, [props.type])  
     
-    //console.log(props.emotes)
-    
+    //Checking if message has emotes, if not skip this whole thing
     if (props.emotes != null) {
       const emoteIds = Object.keys(props.emotes);
 
@@ -39,6 +48,6 @@ export function DisplayEmotes(props){
     }
 
 
-
-    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style={{ color: 'white' }}></span>
+    //Re-printing the message with emotes embedded, probably not the best implementation but it works and I'm too dumb to make it better
+    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style={{ color: action ? props.color : 'white', fontStyle: action ? "italic" : "normal"}}></span>
 }
