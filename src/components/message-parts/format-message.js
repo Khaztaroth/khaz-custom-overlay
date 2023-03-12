@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useColorCorrection } from "../hook/color-correction";
 
 export function DisplayEmotes(props){
     //Processes the emote IDs that come from the "tags" array
@@ -17,7 +18,6 @@ export function DisplayEmotes(props){
     //Checking if message has emotes, if not skip this whole thing
     if (props.emotes != null) {
       const emoteIds = Object.keys(props.emotes);
-
 
       // Sort the emote locations in the message in descending order
       const emoteLocations = emoteIds.flatMap((emoteId) => {
@@ -47,7 +47,21 @@ export function DisplayEmotes(props){
       });
     }
 
+    const correctedColor = useColorCorrection(props.color)
+
+    const styles = {
+      action: {
+        color: correctedColor,
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+      },
+      chat: {
+        color: 'white',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
+      }
+    }
 
     //Re-printing the message with emotes embedded, probably not the best implementation but it works and I'm too dumb to make it better
-    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style={{ color: action ? props.color : 'white', fontStyle: action ? "italic" : "normal"}}></span>
+    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style={ action ? styles.action : styles.chat }></span>
 }

@@ -15,7 +15,7 @@ function ArtOverlay() {
            </div>
             </div>
             <div id="rightside" className="default">
-                <div id="screen" className="default"></div>
+                <div id="art_screen" className="default"></div>
             </div>
         
             </div>

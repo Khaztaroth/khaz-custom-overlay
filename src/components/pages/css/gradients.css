@@ -1,3 +1,6 @@
+/* Gradient functions based on https://www.bram.us/2021/01/29/animating-a-css-gradient-border/ */
+
+
 :root {
   --purple: #d457f3;
   --orange: #f4b14f;
@@ -15,7 +18,7 @@ body{
 
 .default {
   --angle: 0deg;
-  border-image: conic-gradient(from var(--angle), var(--purple), var(--orange), var(--purple)) 1;
+  border-image: linear-gradient(var(--angle), var(--purple), var(--orange)) 1;
   
   animation: 10s rotate linear infinite;
 }

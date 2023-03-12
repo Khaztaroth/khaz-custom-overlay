@@ -1,18 +1,19 @@
 #overlayBlock {
     z-index: 1;
     position: fixed;
-    height: 98vh;
-    width: 99vw;
+    height: 98%;
+    width: 99%;
 
     border-top: 1vmin solid;
     border-bottom: 1vmin solid;
+    border-left: 1vmin solid;
+    border-right: 1vmin solid;
     
     display:  flex;
 }
 
 #leftside {
     flex: 3;
-    border-left: 1vmin solid;
     border-right: 1vmin solid;
 }
 
@@ -44,7 +45,6 @@
     z-index: 0;
 }
 #rightside {
-    border-right: 1vmin solid;
     flex: 14;
 }
 

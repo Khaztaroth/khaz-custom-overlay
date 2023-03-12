@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { useColorCorrection } from "../hook/color-correction"
 
 export function DisplayName(props) {
 
@@ -19,14 +20,16 @@ export function DisplayName(props) {
         setCreateNewColor(randomColor())
     }, [])
 
+
     //Checking if the user has a color, if not, make one
     if (props.color === null) {
         newColor = createColor
     }
 
+    const correctedColor = useColorCorrection(newColor);
     //Render the username with a color
     return (
-       <strong className='user-name' style={{color: newColor}}>{props.user}: </strong>
+       <strong className='user-name' style={{color: correctedColor}}>{props.user}: </strong>
     )
 }
 

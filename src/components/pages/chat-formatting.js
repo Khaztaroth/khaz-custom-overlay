@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { DisplayBadges } from "../message-parts/Display-badges";
-import { DisplayEmotes } from "../message-parts/Display-emotes";
-import { DisplayName } from "../message-parts/Display-name";
+import { DisplayBadges } from "../message-parts/format-badges";
+import { DisplayEmotes } from "../message-parts/format-message";
+import { DisplayName } from "../message-parts/format-name";
 
 import { UseMessages } from "../api-requests/message-handler";
 
