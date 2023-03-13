@@ -18,7 +18,7 @@ body{
 
 .default {
   --angle: 0deg;
-  border-image: linear-gradient(var(--angle), var(--purple), var(--orange)) 1;
+  border-image: conic-gradient(from var(--angle), var(--purple), var(--orange), var(--purple)) 1;
   
   animation: 10s rotate linear infinite;
 }
