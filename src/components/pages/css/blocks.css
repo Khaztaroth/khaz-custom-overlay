@@ -19,7 +19,7 @@
 #chatContainer {
     overflow-y: scroll;
     height: 100%;
-    width: 97.5%;
+    width: 100%;
     padding-right: 20px;
     z-index: 1;
 
@@ -28,7 +28,7 @@
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    width: 96%;
+    width: 98%;
     height: 72vh;
 
     z-index: 0;

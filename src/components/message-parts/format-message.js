@@ -25,7 +25,7 @@ export function DisplayEmotes(props){
           return {
             startIndex: parseInt(location.split('-')[0]),
             endIndex: parseInt(location.split('-')[1]),
-            emoteUrl: `https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/1.0`,
+            emoteUrl: `https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/2.0`,
             emoteId: emoteId
           };
         });
