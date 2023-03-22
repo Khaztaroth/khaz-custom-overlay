@@ -7,7 +7,7 @@
 }
 body{
   background-color: transparent;
-}
+}  
 
 .block {
     --angle: 0deg;
@@ -21,7 +21,21 @@ body{
   border-image: conic-gradient(from var(--angle), var(--purple), var(--orange), var(--purple)) 1;
   
   animation: 10s rotate linear infinite;
+
+  transition-property: border-image;
+  transition-duration: 1s;
 }
+
+.sub-alert {
+  --angle: 0deg;
+  border-image: conic-gradient(from var(--angle), rgb(0, 128, 0), rgb(76, 245, 76), rgb(0, 128, 0)) 1;
+  
+  animation: 2s rotate linear infinite;
+
+  transition-property: border-image;
+  transition-duration: 0.5s;
+}
+
 
 @keyframes rotate {
     to {

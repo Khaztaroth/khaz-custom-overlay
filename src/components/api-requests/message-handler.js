@@ -40,6 +40,12 @@ export function UseMessages (channel) {
               });
         };
 
+        const onSubscriptionHandler = (channel, username, method, message, userstate) => {
+            setMessages((prevMessages) => [
+                ...prevMessages.push(message)
+            ])
+        }
+
         //Remove message by filtering the message id 
         const onDeletedMessage = (channel, username, deletedMessage, userstate) => {
             setMessages((prevMessages) => {
@@ -66,6 +72,7 @@ export function UseMessages (channel) {
           
         //calling the message handler
         client.on("message", onMessageHandler);
+        client.on("subscription", onSubscriptionHandler);
         client.on("messagedeleted", onDeletedMessage);
         client.on("timeout", onUserTimeout)
         client.on("clearchat", onClearChat)
@@ -73,6 +80,7 @@ export function UseMessages (channel) {
         return () => {
             //dismounting the message handler to avoid memory leaks
             client.off("message", onMessageHandler);
+            client.off("subscription", onSubscriptionHandler);
             client.off("messagedeleted", onDeletedMessage);
             client.off("timeout", onUserTimeout)
             client.off("clearchat", onClearChat)
