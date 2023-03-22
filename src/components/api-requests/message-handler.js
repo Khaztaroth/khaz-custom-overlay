@@ -22,27 +22,33 @@ export function UseMessages (channel) {
 
             if (self) return;
             let messageWithEmotes = message;
-            setMessages(prevMessages => {
+            setMessages((prevMessages) => {
                 const newMessage = {
-                  channelId: userstate['room-id'],
-                  id: message.id,
-                  emotes: userstate.emotes,
-                  message: messageWithEmotes,
-                  type: userstate['message-type'],
-                  userId: userstate['user-id'],
-                  badges: userstate.badges,
-                  color: userstate['color'],
-                  username: userstate['display-name'],
+                    channelId: userstate['room-id'],
+
+                    id: userstate.id,
+                    emotes: userstate.emotes,
+                    message: messageWithEmotes,
+                    type: userstate['message-type'],
+  
+                    userId: userstate['user-id'],
+                    badges: userstate.badges,
+                    color: userstate['color'],
+                    username: userstate['display-name'],
                 };
-                // use slice to keep the last 20 messages
-                const updatedMessages = [...prevMessages.slice(-20), newMessage];
-                return updatedMessages;
-              });
+                const slicedMessage = [...prevMessages.slice(-20), newMessage]
+                return slicedMessage
+            });
         };
 
         const onSubscriptionHandler = (channel, username, method, message, userstate) => {
             setMessages((prevMessages) => [
-                ...prevMessages.push(message)
+                ...prevMessages, {
+                    username: username,
+                    message: message,
+                    color: userstate['color'],
+                    emotes: userstate.emotes
+                }
             ])
         }
 
@@ -56,10 +62,10 @@ export function UseMessages (channel) {
           };
 
         //Remove messages by filtering the user id
-        const onUserTimeout = (channel, username, reason, duration, userState) => {
+        const onUserTimeout = (channel, username, reason, duration, userstate) => {
             setMessages((prevMessages) => {
                 return prevMessages.filter((usr) => {
-                    return usr.userId !== userState["target-user-id"]
+                    return usr.userId !== userstate["target-user-id"]
                 });
             });
         };
@@ -74,16 +80,16 @@ export function UseMessages (channel) {
         client.on("message", onMessageHandler);
         client.on("subscription", onSubscriptionHandler);
         client.on("messagedeleted", onDeletedMessage);
-        client.on("timeout", onUserTimeout)
-        client.on("clearchat", onClearChat)
+        client.on("timeout", onUserTimeout);
+        client.on("clearchat", onClearChat);
         
         return () => {
             //dismounting the message handler to avoid memory leaks
             client.off("message", onMessageHandler);
             client.off("subscription", onSubscriptionHandler);
             client.off("messagedeleted", onDeletedMessage);
-            client.off("timeout", onUserTimeout)
-            client.off("clearchat", onClearChat)
+            client.off("timeout", onUserTimeout);
+            client.off("clearchat", onClearChat);
         }
    }, [channel]);
 

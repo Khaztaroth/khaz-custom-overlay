@@ -1,8 +1,8 @@
 export function useColorCorrection (color) {
     var convert = require('color-convert');
 
-    let hsv = "#FFFFFF";
-    hsv = convert.hex.hsv(color);
+    let uglyColor = color || "#FFFFFF"
+    const hsv = convert.hex.hsv(uglyColor);
 
     const useAdjustedColor = () => {
         const h = hsv[0]
