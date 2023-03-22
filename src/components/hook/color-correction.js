@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export function useColorCorrection (color) {
     var convert = require('color-convert');
 
@@ -11,7 +9,8 @@ export function useColorCorrection (color) {
         const v = hsv[2]
 
         const maxValue = Math.min( 70, s);
-        const [correctedColor, setCorrectedColor] = useState([h,maxValue,v]);
+        
+        let correctedColor = [h,maxValue,v]
 
         return correctedColor
     }

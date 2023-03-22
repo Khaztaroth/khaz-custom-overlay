@@ -22,22 +22,22 @@ export function UseMessages (channel) {
 
             if (self) return;
             let messageWithEmotes = message;
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                {
+            setMessages(prevMessages => {
+                const newMessage = {
                   channelId: userstate['room-id'],
-
                   id: message.id,
                   emotes: userstate.emotes,
                   message: messageWithEmotes,
                   type: userstate['message-type'],
-
                   userId: userstate['user-id'],
                   badges: userstate.badges,
                   color: userstate['color'],
                   username: userstate['display-name'],
-                }
-            ]);
+                };
+                // use slice to keep the last 20 messages
+                const updatedMessages = [...prevMessages.slice(-20), newMessage];
+                return updatedMessages;
+              });
         };
 
         //Remove message by filtering the message id 
