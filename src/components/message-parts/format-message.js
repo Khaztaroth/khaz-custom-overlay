@@ -45,6 +45,7 @@ export function DisplayEmotes(props){
         });
       });
     }
+
     const randomColor = useCreateColor()
     let newColor = props.color 
     if (newColor === null) {
@@ -57,14 +58,17 @@ export function DisplayEmotes(props){
         color: correctedColor,
         fontStyle: 'italic',
         fontWeight: 'bold',
+        border: '10',
+        borderColor: 'red',
+        
       },
       chat: {
-        color: 'white',
+        color: correctedColor,
         fontStyle: 'normal',
-        fontWeight: 'normal',
+        fontWeight: 'bold',
       }
     }
 
     //Re-printing the message with emotes embedded, probably not the best implementation but it works and I'm too dumb to make it better
-    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style={ action ? styles.action : styles.chat }></span>
+    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style= { action ? styles.action :  styles.chat }></span>
 }
