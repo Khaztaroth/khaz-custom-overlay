@@ -4,6 +4,7 @@ import { DisplayEmotes } from "../message-parts/format-message";
 import { DisplayName } from "../message-parts/format-name";
 
 import { UseMessages } from "../api-requests/message-handler";
+import { useChannelBadges, useDefaultBadges } from "../api-requests/get-badges";
 
 //sets up a url search in the current domain
 const params = new URLSearchParams(window.location.search)
@@ -13,6 +14,7 @@ const channel = params.get('channel')
 
 //Chat renderer
 export function DisplayChat() {
+
   
     //getting messages from the TMI library
     const messages = UseMessages(channel);
@@ -27,6 +29,11 @@ export function DisplayChat() {
         container.scrollTop = container.scrollHeight;
       }
     }, [messages]);
+
+    console.log("channel id", messages.map((message) => (message.channelId)))
+
+    useChannelBadges(messages.map((message) => (message.channelId)));
+    useDefaultBadges();  
 
     //Message formatter, each element handles its segment through prop calls
     return (

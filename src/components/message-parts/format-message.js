@@ -66,5 +66,5 @@ export function DisplayEmotes(props){
     }
 
     //Re-printing the message with emotes embedded, probably not the best implementation but it works and I'm too dumb to make it better
-    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style={ action ? styles.action : styles.chat }></span>
+    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style={ action ? styles.chat : styles.action }></span>
 }
