@@ -21,6 +21,6 @@ export function FetchBadges (channel) {
         useEffect(() =>{
            fetchData(CHANNEL_URL, CHANNEL_KEY);
            fetchData(DEFAULT_URL, DEFAULT_KEY);
-        }, [CHANNEL_URL, DEFAULT_URL, CHANNEL_KEY, DEFAULT_KEY])
+        }, [CHANNEL_URL, DEFAULT_URL])
 
       }
