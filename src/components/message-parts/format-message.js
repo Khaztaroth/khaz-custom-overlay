@@ -1,74 +1,57 @@
-import { useEffect, useState } from "react";
+import DOMPurify from "dompurify";
 import { useColorCorrection } from "../hook/color-correction";
 import { useCreateColor } from "../hook/create-color";
 
 export function DisplayEmotes(props){
-     //setting the message value to be the same as gotten from TMI to avoid printing nothing if there's no emotes
-    let messageWithEmotes = props.message
-
     //Checking if message type is an action, for formatting reasons
-    const [action, setAction] = useState(false)
-    useEffect(() => {
-      if (props.type === 'action') {
-        setAction(true);
-      }
-    }, [props.type])  
-    
+    const type  = props.type
+
     //Checking if message has emotes, if not skip this whole thing
-    if (props.emotes != null) {
-      const emoteIds = Object.keys(props.emotes);
-
-      // Sort the emote locations in the message in descending order
-      const emoteLocations = emoteIds.flatMap((emoteId) => {
-        return props.emotes[emoteId].map((location) => {
-          return {
-            startIndex: parseInt(location.split('-')[0]),
-            endIndex: parseInt(location.split('-')[1]),
-            emoteUrl: `https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/2.0`,
-            emoteId: emoteId
-          };
-        });
-      }).sort((a, b) => {
-        return b.startIndex - a.startIndex;
-      });
+      const messageArray = props.messageSegments
+      var newMessageArray = [];
       
-      // Replace the emote codes with image elements and adjust the position of subsequent replacements
-      emoteLocations.forEach((location) => {
-        messageWithEmotes = messageWithEmotes.substring(0, location.startIndex) +
-          `<img src="${location.emoteUrl}" alt="${location.emoteId}" />` +
-          messageWithEmotes.substring(location.endIndex + 1);
-        emoteLocations.forEach((subLocation) => {
-          if (subLocation.startIndex > location.startIndex) {
-            subLocation.startIndex += location.emoteUrl.length - location.endIndex + location.startIndex - 1;
-            subLocation.endIndex += location.emoteUrl.length - location.endIndex + location.startIndex - 1;
-          }
-        });
-      });
-    }
+      messageArray.forEach((part) => {
+        if (part.type === 'text') {
+          newMessageArray.push(part.text)
+        } else if (part.type === 'emote'){
+          const id = part.id
+          const emoteUrl = `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/light/2.0`
+          const img = `<img src=${emoteUrl} alt=${part.name} />` 
+          newMessageArray.push(img)
+        } else return null
+      })
 
-    const randomColor = useCreateColor()
+    const sanitizer = DOMPurify.sanitize
+
+    const randomColor = useCreateColor();
     let newColor = props.color 
+
     if (newColor === null) {
       newColor = randomColor;
     }
-    const correctedColor = useColorCorrection(newColor)
 
-    const styles = {
-      action: {
-        color: correctedColor,
-        fontStyle: 'italic',
-        fontWeight: 'bold',
-        border: '10',
-        borderColor: 'red',
-        
-      },
-      chat: {
-        color: correctedColor,
-        fontStyle: 'normal',
-        fontWeight: 'bold',
+    const correctedColor = useColorCorrection(newColor);
+
+    const styles = (type) => {
+      switch(type) {
+        case 'chat': return {
+          color: 'white',
+          fontStyle: 'normal',
+          fontWeight: 'bold',
+          }
+        case 'action': return {
+          color: correctedColor,
+          fontStyle: 'italic',
+          fontWeight: 'bold',
+          }
+        case 'announcement': return {
+          color: "white",
+          fontStyle: 'italic',
+          fontWeight: 'bold',
+        }
       }
     }
 
     //Re-printing the message with emotes embedded, probably not the best implementation but it works and I'm too dumb to make it better
-    return <span className="user-message" dangerouslySetInnerHTML={{ __html: messageWithEmotes}} style= { action ? styles.action :  styles.chat }></span>
+    return <span className="user-message" style= { styles(type) }><section dangerouslySetInnerHTML={{__html: sanitizer(newMessageArray.join(''))}}></section></span>
 }

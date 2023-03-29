@@ -1,0 +1,6 @@
+import useBadges from "./components/api-requests/badge-handler"
+
+
+export default function App() {
+    useBadges("25579349");
+}

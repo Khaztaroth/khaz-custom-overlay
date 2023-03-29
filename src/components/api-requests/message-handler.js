@@ -1,97 +1,125 @@
-import { useEffect, useState } from "react";
-import tmi from 'tmi.js';
+import { useEffect, useState, useRef } from 'react';
+import { chatClient } from './twurple-client';
 
-export function UseMessages (channel) {
+export function useMessages(channel) {
     const [messages, setMessages] = useState([]);
-
+    const messagesRef = useRef([]);
     
-    //Calling useEffect to separate the message into elements that can be called individually
     useEffect(() => {
-        const cliendID = process.env.REACT_APP_BOT_CLIENT_ID;
-        
-        const client = new tmi.Client({
-            channels: [channel],
-            clientid: cliendID
+        chatClient.connect();
+
+        chatClient.onMessage((channel, user, text, msg) => {
+            // console.log("raw:", msg)
+
+            if (!messagesRef.current.includes(msg.id)) {
+                messagesRef.current.push(msg.id);
+                setMessages((prevMessages) => [
+                    ...prevMessages, {
+                        channel: channel,
+                        channelId: msg.channelId,
+
+                        username: msg.userInfo.displayName,
+                        userId: msg.userInfo.userId,
+                        badges: msg.userInfo.badges,
+                        color: msg.userInfo.color,
+
+                        id: msg.id,
+                        text: text,
+                        emotes: msg.emoteOffsets,
+
+                        messageSegments: msg.parseEmotes(),
+                                
+                        type: "chat",
+                        raw: msg,
+
+                    }
+                ]);
+            }
+        });
+
+        chatClient.onAction((channel, user, text, msg) => {
+            // console.log("raw:", msg)
+
+            if (!messagesRef.current.includes(msg.id)) {
+                messagesRef.current.push(msg.id);
+                setMessages((prevMessages) => [
+                    ...prevMessages, {
+                        channel: channel,
+                        channelId: msg.channelId,
+
+                        username: msg.userInfo.displayName,
+                        userId: msg.userInfo.userId,
+                        badges: msg.userInfo.badges,
+                        color: msg.userInfo.color,
+
+                        id: msg.id,
+                        text: text,
+                        emotes: msg.emoteOffsets,
+
+                        messageSegments: msg.parseEmotes(),
+
+                        type: "action",
+                        raw: msg,
+
+                    }
+                ]);
+            }
+        });
+        chatClient.onAnnouncement((channel, user, announcementInfo, msg) => {
+            if (!messagesRef.current.includes(msg.id)) {
+                messagesRef.current.push(msg.id);
+                setMessages((prevMessages) => [
+                    ...prevMessages, {
+                        channel: channel,
+                        channelId: msg.channelId,
+
+                        username: msg.userInfo.displayName,
+                        userId: msg.userInfo.userId,
+                        badges: msg.userInfo.badges,
+                        color: msg.userInfo.color,
+                        announcementColor: announcementInfo,
+
+                        id: msg.id,
+                        text: msg.message,
+                        emotes: msg.emoteOffsets,
+
+                        messageSegments: msg.parseEmotes(),
+                                
+                        type: "announcement",
+                        raw: msg
+
+                    }
+                ]);
+            }
         })
-    
-        client.connect();
 
-        //setting constant to handle the message so it's only called once
-        //passing message and user info to the handlers
-        const onMessageHandler = (channel, userstate, message, self) => {
-
-            if (self) return;
-            let messageWithEmotes = message;
+        chatClient.onMessageRemove((channel, messageId, msg) => {
             setMessages((prevMessages) => {
-                const newMessage = {
-                    channelId: userstate['room-id'],
-
-                    id: userstate.id,
-                    emotes: userstate.emotes,
-                    message: messageWithEmotes,
-                    type: userstate['message-type'],
-  
-                    userId: userstate['user-id'],
-                    badges: userstate.badges,
-                    color: userstate['color'],
-                    username: userstate['display-name'],
-                };
-                const slicedMessage = [...prevMessages.slice(-20), newMessage]
-                return slicedMessage
-            });
-        };
-
-        const onSubscriptionHandler = (channel, username, method, message, userstate) => {
-            setMessages((prevMessages) => [
-                ...prevMessages, {
-                    username: username,
-                    message: message,
-                    color: userstate['color'],
-                    emotes: userstate.emotes
-                }
-            ])
-        }
-
-        //Remove message by filtering the message id 
-        const onDeletedMessage = (channel, username, deletedMessage, userstate) => {
-            setMessages((prevMessages) => {
-              return prevMessages.filter((msg) => {
-                return msg.id !== userstate["target-msg-id"];
-              });
-            });
-          };
-
-        //Remove messages by filtering the user id
-        const onUserTimeout = (channel, username, reason, duration, userstate) => {
-            setMessages((prevMessages) => {
-                return prevMessages.filter((usr) => {
-                    return usr.userId !== userstate["target-user-id"]
+                return prevMessages.filter((msg) => {
+                  return msg.id !== messageId;
                 });
             });
-        };
-        //Removes messages by emptying the array (it causes an error to pop-up but I don't care)
-        const onClearChat = (channel) => {
+        });
+
+        chatClient.onTimeout((channel, user, duration, msg) => {
+            // console.log("user:",user)
+            // console.log("msg:", msg)
+
+            setMessages((prevMessages) => {
+                return prevMessages.filter((usr) => {
+                    return usr.userId !== msg.targetUserId
+                });
+            });
+        });
+
+        chatClient.onChatClear((channel, msg) => {
             setMessages((prevMessages) => {
                 return prevMessages = []
             })
-        }
-          
-        //calling the message handler
-        client.on("message", onMessageHandler);
-        client.on("subscription", onSubscriptionHandler);
-        client.on("messagedeleted", onDeletedMessage);
-        client.on("timeout", onUserTimeout);
-        client.on("clearchat", onClearChat);
-        
-        return () => {
-            //dismounting the message handler to avoid memory leaks
-            client.off("message", onMessageHandler);
-            client.off("subscription", onSubscriptionHandler);
-            client.off("messagedeleted", onDeletedMessage);
-            client.off("timeout", onUserTimeout);
-            client.off("clearchat", onClearChat);
-        }
-   }, [channel]);
+        });
+            
+    },[channel])
 
-   return messages
-}
+        // console.log("incoming message:", messages)
+        return messages
+};
