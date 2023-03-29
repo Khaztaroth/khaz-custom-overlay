@@ -88,7 +88,7 @@ export function useMessages(channel) {
 
                         messageSegments: msg.parseEmotes(),
                                 
-                        type: "action",
+                        type: "announcement",
                         raw: msg,
 
                     }; 
