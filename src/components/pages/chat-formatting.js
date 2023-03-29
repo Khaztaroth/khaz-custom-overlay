@@ -4,7 +4,6 @@ import { DisplayEmotes } from "../message-parts/format-message";
 import { DisplayName } from "../message-parts/format-name";
 
 import { useMessages } from "../api-requests/message-handler";
-import { useChannelBadges, useDefaultBadges } from "../api-requests/get-badges";
 
 //Chat renderer
 export function DisplayChat() {
