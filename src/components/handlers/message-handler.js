@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { chatClient } from './twurple-client';
+import { chatClient } from '../api-requests/twurple-client';
 
 export function useMessages(channel) {
     const [messages, setMessages] = useState([]);
@@ -13,8 +13,8 @@ export function useMessages(channel) {
 
             if (!messagesRef.current.includes(msg.id)) {
                 messagesRef.current.push(msg.id);
-                setMessages((prevMessages) => [
-                    ...prevMessages, {
+                setMessages((prevMessages) => {
+                    const newMessage = {
                         channel: channel,
                         channelId: msg.channelId,
 
@@ -32,8 +32,10 @@ export function useMessages(channel) {
                         type: "chat",
                         raw: msg,
 
-                    }
-                ]);
+                    }; 
+                    const slicedArray = [...prevMessages.slice(-19), newMessage]
+                    return slicedArray
+                });
             }
         });
 
@@ -42,8 +44,8 @@ export function useMessages(channel) {
 
             if (!messagesRef.current.includes(msg.id)) {
                 messagesRef.current.push(msg.id);
-                setMessages((prevMessages) => [
-                    ...prevMessages, {
+                setMessages((prevMessages) => {
+                    const newMessage = {
                         channel: channel,
                         channelId: msg.channelId,
 
@@ -57,19 +59,21 @@ export function useMessages(channel) {
                         emotes: msg.emoteOffsets,
 
                         messageSegments: msg.parseEmotes(),
-
+                                
                         type: "action",
                         raw: msg,
 
-                    }
-                ]);
+                    }; 
+                    const slicedArray = [...prevMessages.slice(-19), newMessage]
+                    return slicedArray
+                });
             }
         });
         chatClient.onAnnouncement((channel, user, announcementInfo, msg) => {
             if (!messagesRef.current.includes(msg.id)) {
                 messagesRef.current.push(msg.id);
-                setMessages((prevMessages) => [
-                    ...prevMessages, {
+                setMessages((prevMessages) => {
+                    const newMessage = {
                         channel: channel,
                         channelId: msg.channelId,
 
@@ -77,7 +81,6 @@ export function useMessages(channel) {
                         userId: msg.userInfo.userId,
                         badges: msg.userInfo.badges,
                         color: msg.userInfo.color,
-                        announcementColor: announcementInfo,
 
                         id: msg.id,
                         text: msg.message,
@@ -85,11 +88,13 @@ export function useMessages(channel) {
 
                         messageSegments: msg.parseEmotes(),
                                 
-                        type: "announcement",
-                        raw: msg
+                        type: "action",
+                        raw: msg,
 
-                    }
-                ]);
+                    }; 
+                    const slicedArray = [...prevMessages.slice(-19), newMessage]
+                    return slicedArray
+                });
             }
         })
 
@@ -102,9 +107,6 @@ export function useMessages(channel) {
         });
 
         chatClient.onTimeout((channel, user, duration, msg) => {
-            // console.log("user:",user)
-            // console.log("msg:", msg)
-
             setMessages((prevMessages) => {
                 return prevMessages.filter((usr) => {
                     return usr.userId !== msg.targetUserId

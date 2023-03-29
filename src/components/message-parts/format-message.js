@@ -49,6 +49,11 @@ export function DisplayEmotes(props){
           fontStyle: 'italic',
           fontWeight: 'bold',
         }
+        default: return {
+          color: 'white',
+          fontStyle: 'normal',
+          fontWeight: 'bold',
+        }
       }
     }
 

@@ -3,14 +3,18 @@ import { DisplayBadges } from "../message-parts/format-badges.js";
 import { DisplayEmotes } from "../message-parts/format-message";
 import { DisplayName } from "../message-parts/format-name";
 
-import { useMessages } from "../api-requests/message-handler";
+import { useMessages } from "../handlers/message-handler";
 
 //Chat renderer
 export function DisplayChat() {
 
+  const param = new URLSearchParams(window.location.search)
+  const channel = param.get('channel')
+
+
   
     //getting messages from the TMI library
-    const messages = UseMessages(channel);
+    const messages = useMessages(channel);
         
     //Defining an effect that will scroll to the latest message
     const messagesEndRef = useRef(null);
@@ -34,7 +38,9 @@ export function DisplayChat() {
         case 'announcement': return {
           backgroundColor: `rgba(32, 32, 32, 0.99)`,
           border: `0.1rem solid grey`
-
+        }
+        default: return {
+          backgroundColor: `rgba(32, 32, 32, 0.904)`
         }
       }
     }

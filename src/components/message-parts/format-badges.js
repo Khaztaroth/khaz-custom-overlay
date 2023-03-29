@@ -1,7 +1,7 @@
 //this code is better than before but it ain't good
 
 import DOMPurify from "dompurify";
-import { CHANNEL_KEY, DEFAULT_KEY, FetchBadges } from "../api-requests/badge-handler";
+import { CHANNEL_KEY, DEFAULT_KEY, FetchBadges } from "../api-requests/badge-fetcher";
 
 export function DisplayBadges(props) {
 
