@@ -1,43 +1,61 @@
+//this code is better than before but it ain't good
+
+import DOMPurify from "dompurify";
+import { CHANNEL_KEY, DEFAULT_KEY, FetchBadges } from "../api-requests/badge-handler";
+
 export function DisplayBadges(props) {
 
-  const CHANNEL_DATA_KEY='ChannelData';
-  const DEFAULT_DATA_KEY='DefaultData'
+  const cachedChannelBadges = JSON.parse(localStorage.getItem(CHANNEL_KEY));
+  const cachedDefaultBadges = JSON.parse(localStorage.getItem(DEFAULT_KEY));
+  
+  var badges = [];
 
-  const channelBadgeData = JSON.parse(localStorage.getItem(CHANNEL_DATA_KEY))
-  const defaultBadgeData = JSON.parse(localStorage.getItem(DEFAULT_DATA_KEY))
+  if (cachedChannelBadges == null || cachedDefaultBadges == null) {
+    FetchBadges(props.id);
+  } else {
+    badges.push(cachedChannelBadges.badge_sets, cachedDefaultBadges.badge_sets)
+  }
 
-  //Rendering the badges by checking which one it is, then inserting an img segment
-  const renderBadge = (key, value) => {
-    let badgeSet;
+      const renderBadge = (key, value) => {
+        if (badges.length > 1) {
+          const subBadges = badges[0];
+          const defaultBadges = badges[1];
+  
+          let badgeSet
+  
+          const priorityKeys = ['subscriber', 'bits'];
+          if (priorityKeys.includes(key) && subBadges[key]) {
+            badgeSet = subBadges[key];
+          }
+      
+          if (!badgeSet && defaultBadges[key]) {
+            badgeSet = defaultBadges[key]
+          }
+  
+          if (badgeSet && badgeSet.versions[value]) {
+            const url = badgeSet.versions[value].image_url_2x || badgeSet.versions[value].image_url_1x || badgeSet.versions[value].image_url_4x;
+            const img = `<img src=${url} alt={${key} badge}/>`
+            return img
+          } else {
+              return null
+          };
+      } else {
+          return null
+        };
+    };
 
-    const priorityKeys = ['subscriber', 'bits'];
-    for (const priorityKey of priorityKeys) {
-      if (key === priorityKey && channelBadgeData.badge_sets[priorityKey]) {
-        badgeSet = channelBadgeData.badge_sets[priorityKey];
-        break;
-      }
-    }
+    const userBadges = props.badges
 
-    if (!badgeSet && defaultBadgeData.badge_sets[key]) {
-      badgeSet = defaultBadgeData.badge_sets[key];
-    }
+    var img = []
+    userBadges.forEach((key, value) => {
+        const badge = renderBadge(value, key);  
+        img.push(badge)
+        }
+      );
 
-    if (badgeSet && badgeSet.versions[value]) {
-      const imageUrl = badgeSet.versions[value].image_url_2x || badgeSet.versions[value].image_url_3x || badgeSet.versions[value].image_url_4x;
-      return <img src={imageUrl} alt={`${key} badge`} />;
-    } else {
-      return null;
-    }
-  };
+  const sanitizer = DOMPurify.sanitize
 
-  //rendering the badges, if there's any
   return (
-    <span>
-      {props.badges && Object.entries(props.badges).map(([key, value]) => (
-        <span key={`${key}-${value}`} className='badges'>
-          {renderBadge(key, value)}
-        </span>
-      ))}
-    </span>
-  );
+      <span className='badges' dangerouslySetInnerHTML={{__html: sanitizer(img.join(''))}}></span>
+  )
 }

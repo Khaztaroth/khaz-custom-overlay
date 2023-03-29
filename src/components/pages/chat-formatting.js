@@ -1,16 +1,10 @@
 import { useEffect, useRef } from "react";
-import { DisplayBadges } from "../message-parts/format-badges";
+import { DisplayBadges } from "../message-parts/format-badges.js";
 import { DisplayEmotes } from "../message-parts/format-message";
 import { DisplayName } from "../message-parts/format-name";
 
-import { UseMessages } from "../api-requests/message-handler";
+import { useMessages } from "../api-requests/message-handler";
 import { useChannelBadges, useDefaultBadges } from "../api-requests/get-badges";
-
-//sets up a url search in the current domain
-const params = new URLSearchParams(window.location.search)
-
-//looks for the value assinged to the "channel" header (url/thing?channel=)
-const channel = params.get('channel')
 
 //Chat renderer
 export function DisplayChat() {
@@ -30,11 +24,21 @@ export function DisplayChat() {
       }
     }, [messages]);
 
-    console.log("channel id", messages.map((message) => (message.channelId)))
+    const MessageBG = (type) => {
+      switch(type) {
+        case 'chat': return {
+          backgroundColor: `rgba(32, 32, 32, 0.904)`
+        }
+        case 'action': return {
+          backgroundColor: `rgba(32, 32, 32, 0.904)`
+        }
+        case 'announcement': return {
+          backgroundColor: `rgba(32, 32, 32, 0.99)`,
+          border: `0.1rem solid grey`
 
-    useChannelBadges(messages.map((message) => (message.channelId)));
-    useDefaultBadges();  
-
+        }
+      }
+    }
     //Message formatter, each element handles its segment through prop calls
     return (
       <div
@@ -43,14 +47,20 @@ export function DisplayChat() {
         ref={messagesEndRef}
       >
         {messages.map((message, index) => (
-          <div key={index} className="message">
-            <DisplayBadges badges={message.badges} id={message.channelId} />
+          <div key={index} className="message" style={MessageBG(message.type)}>
+            <DisplayBadges badges={message.badges} id={message.channelId} channel={message.channel}/>
             <DisplayName
               user={message.username}
               color={message.color}
               style={{ color: "white" }}
             />
-            <DisplayEmotes emotes={message.emotes} message={message.message} type={message.type} color={message.color}/>
+            <DisplayEmotes 
+              emotes={message.emotes} 
+              message={message.text} 
+              messageSegments={message.messageSegments} 
+              type={message.type}
+              announcementColor={message.announcementColor}
+              color={message.color}/>
           </div>
         ))}
       </div>
