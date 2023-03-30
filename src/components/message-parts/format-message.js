@@ -10,7 +10,7 @@ export function DisplayEmotes(props){
       const messageArray = props.messageSegments
       var newMessageArray = [];
 
-      console.log("message segments:", messageArray)
+      // console.log("message segments:", messageArray)
       
       messageArray.forEach((part) => {
         if (part.type === 'text') {

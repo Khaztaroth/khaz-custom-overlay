@@ -32,7 +32,7 @@ export function DisplayChat() {
         }
         case 'announcement': return {
           backgroundColor: `rgba(32, 32, 32, 0.99)`,
-          border: `0.1rem solid grey`
+          border: `0.15rem solid grey`
         }
         default: return {
           backgroundColor: `rgba(32, 32, 32, 0.904)`

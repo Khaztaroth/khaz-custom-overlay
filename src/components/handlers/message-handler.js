@@ -98,6 +98,35 @@ export function useMessages() {
             }
         })
 
+        chatClient.onSub((channel, user, ChatSubInfo, msg) => {
+            if (!messagesRef.current.includes(msg.id)) {
+                messagesRef.current.push(msg.id);
+                setMessages((prevMessages) => {
+                    const newMessage = {
+                        channel: channel,
+                        channelId: msg.channelId,
+
+                        username: ChatSubInfo.displayName,
+                        userId: msg.userInfo.userId,
+                        badges: msg.userInfo.badges,
+                        color: msg.userInfo.color,
+
+                        id: msg.id,
+                        text: ChatSubInfo.message,
+                        emotes: msg.emoteOffsets,
+
+                        messageSegments: msg.parseEmotes(),
+                                
+                        type: "subscription",
+                        raw: msg,
+
+                    }; 
+                    const slicedArray = [...prevMessages.slice(-19), newMessage]
+                    return slicedArray
+                });
+            }
+        })
+
         chatClient.onMessageRemove((channel, messageId, msg) => {
             setMessages((prevMessages) => {
                 return prevMessages.filter((msg) => {

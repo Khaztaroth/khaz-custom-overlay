@@ -1,32 +1,23 @@
-import { randomColor as rand} from "randomcolor";
 import React, { useEffect, useState } from "react"
 import { useColorCorrection } from "../hook/color-correction"
 
 export function DisplayName(props) {
 
     //Setting color as the same TMI gives in case the user already has one
-    let newColor = props.color
-
-    console.log("incoming color:", newColor)
+    var newColor = props.color
 
     //Creating a random HEX color in case the user hasn't set one for themselves
-    const [createColor, setCreateColor] = useState([]);
-    const randomColor = rand({
-        luminosity: 'light',
-        format: 'hex',
-     })
+    // const [createdColor, setCreateColor] = useState([]);
+    var randomColor = require('randomcolor')
+    const assingedColor = randomColor({luminosity: 'light', format: 'hex',})
 
-    useEffect(() => {
-        setCreateColor(randomColor)
-    }, []);
-
-    // console.log("created color:", createColor)
-
+    
     //Checking if the user has a color, if not, make one
-    if (!newColor) {
-        newColor = createColor
-        console.log("new color:", newColor)
-    };
+     useEffect(() => {
+     if (!newColor) {
+            newColor = assingedColor
+        }
+    }, [])
 
     const [correctedColor, setCorrectedColor] = useState(newColor);
     const colorcorrector = useColorCorrection(newColor);
@@ -35,6 +26,7 @@ export function DisplayName(props) {
         setCorrectedColor(colorcorrector)
     }, [colorcorrector]);
 
+    // console.log("incoming color", props.color, "new color:", newColor, "corrected color:", correctedColor)
     //Render the username with a color
     return (
        <strong className='user-name' style={{color: correctedColor }}>{props.user}: </strong>
