@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { chatClient } from '../api-requests/twurple-client';
 
-export function useMessages(channel) {
+export function useMessages() {
     const [messages, setMessages] = useState([]);
     const messagesRef = useRef([]);
     
@@ -120,8 +120,7 @@ export function useMessages(channel) {
             })
         });
             
-    },[channel])
+    },[])
 
-        // console.log("incoming message:", messages)
         return messages
 };

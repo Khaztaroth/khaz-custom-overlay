@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
+import randomColor from "randomcolor";
 import { useColorCorrection } from "../hook/color-correction";
-import { useCreateColor } from "../hook/create-color";
 
 export function DisplayEmotes(props){
     //Checking if message type is an action, for formatting reasons
@@ -9,6 +9,8 @@ export function DisplayEmotes(props){
     //Checking if message has emotes, if not skip this whole thing
       const messageArray = props.messageSegments
       var newMessageArray = [];
+
+      console.log("message segments:", messageArray)
       
       messageArray.forEach((part) => {
         if (part.type === 'text') {
@@ -23,11 +25,15 @@ export function DisplayEmotes(props){
 
     const sanitizer = DOMPurify.sanitize
 
-    const randomColor = useCreateColor();
+    const random = randomColor({
+      luminosity: 'dark',
+      format: 'hex'
+   })
+
     let newColor = props.color 
 
     if (newColor === null) {
-      newColor = randomColor;
+      newColor = random;
     }
 
     const correctedColor = useColorCorrection(newColor);
