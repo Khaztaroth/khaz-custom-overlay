@@ -8,7 +8,7 @@ export function useMessages() {
     useEffect(() => {
         chatClient.connect();
 
-        chatClient.onMessage((channel, user, text, msg) => {
+         chatClient.onMessage((channel, user, text, msg) => {
             // console.log("raw:", msg)
 
             if (!messagesRef.current.includes(msg.id)) {
