@@ -53,7 +53,6 @@ export function DisplayChat() {
             <DisplayName
               user={message.username}
               color={message.color}
-              style={{ color: "white" }}
             />
            </section>
             <DisplayEmotes 
