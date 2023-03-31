@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
-import { DisplayBadges } from "../message-parts/format-badges.js";
-import { DisplayEmotes } from "../message-parts/format-message";
-import { DisplayName } from "../message-parts/format-name";
+import { DisplayBadges } from "../components/message-parts/format-badges.js";
+import { DisplayEmotes } from "../components/message-parts/format-message";
+import { DisplayName } from "../components/message-parts/format-name";
 
-import { useMessages } from "../handlers/message-handler";
+import { useMessages } from "../components/handlers/message-handler";
 
 //Chat renderer
 export function DisplayChat() {

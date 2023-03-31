@@ -7,10 +7,16 @@ import { DisplayChat } from "../chat-formatting";
 function GamesOverlay() {
 
 //sets up a url search in the current domain
-// const params = new URLSearchParams(window.location.search)
+const params = new URLSearchParams(window.location.search)
 
 //looks for the value assinged to the "channel" header (url/thing?channel=)
-// const channel = params.get('channel')
+const chat = params.get('chat')
+
+var showChat = true
+
+if (chat === 'false') {
+    showChat = false
+}
 
 // const subData = UseSubscriptions(channel);
 
@@ -34,7 +40,7 @@ function GamesOverlay() {
             <div id='overlayBlock' className={frameStyle}>
             
             <div id="leftside" className={frameStyle}>
-                <div id="chatBox" className={frameStyle}>{<DisplayChat />}</div>
+                <div id="chatBox" className={frameStyle}>{showChat? <DisplayChat /> : ""}</div>
                 <div id="webcam" className={frameStyle}>
            </div>
             </div>

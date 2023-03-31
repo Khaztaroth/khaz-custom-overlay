@@ -1,8 +1,18 @@
 import React from "react";
 
-// import './css/art_overlay.css'
-
 import { DisplayChat } from "../chat-formatting";
+
+//sets up a url search in the current domain
+const params = new URLSearchParams(window.location.search)
+
+//looks for the value assinged to the "channel" header (url/thing?channel=)
+const chat = params.get('chat')
+
+var showChat = true
+
+if (chat === 'false') {
+    showChat = false
+}
 
 function ArtOverlay() {
     return (
@@ -10,7 +20,7 @@ function ArtOverlay() {
             <div id='overlayBlock' className='block'>
             
             <div id="leftside" className="default">
-                <div id="chatBox" className="default" >{<DisplayChat />}</div>
+                <div id="chatBox" className="default" >{showChat ? <DisplayChat /> : ""}</div>
                 <div id="webcam" className="default">
            </div>
             </div>

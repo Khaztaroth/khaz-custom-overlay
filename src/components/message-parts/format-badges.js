@@ -2,6 +2,7 @@
 
 import DOMPurify from "dompurify";
 import { CHANNEL_KEY, DEFAULT_KEY, FetchBadges } from "../api-requests/badge-fetcher";
+import { RenderBadge } from "../hook/badge-rendered";
 
 export function DisplayBadges(props) {
 
@@ -16,39 +17,11 @@ export function DisplayBadges(props) {
     badges.push(cachedChannelBadges.badge_sets, cachedDefaultBadges.badge_sets)
   }
 
-      const renderBadge = (key, value) => {
-        if (badges.length > 1) {
-          const subBadges = badges[0];
-          const defaultBadges = badges[1];
-  
-          let badgeSet
-  
-          const priorityKeys = ['subscriber', 'bits'];
-          if (priorityKeys.includes(key) && subBadges[key]) {
-            badgeSet = subBadges[key];
-          }
-      
-          if (!badgeSet && defaultBadges[key]) {
-            badgeSet = defaultBadges[key]
-          }
-  
-          if (badgeSet && badgeSet.versions[value]) {
-            const url = badgeSet.versions[value].image_url_2x || badgeSet.versions[value].image_url_1x || badgeSet.versions[value].image_url_4x;
-            const img = `<img src=${url} alt={${key} badge}/>`
-            return img
-          } else {
-              return null
-          };
-      } else {
-          return null
-        };
-    };
-
-    const userBadges = props.badges
+  const userBadges = props.badges
 
     var img = []
     userBadges.forEach((key, value) => {
-        const badge = renderBadge(value, key);  
+        const badge = RenderBadge(value, key, badges);  
         img.push(badge)
         }
       );
