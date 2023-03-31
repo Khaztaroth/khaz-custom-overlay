@@ -1,16 +1,12 @@
 import DOMPurify from "dompurify";
-import randomColor from "randomcolor";
 import { useColorCorrection } from "../hook/color-correction";
 
 export function DisplayEmotes(props){
     //Checking if message type is an action, for formatting reasons
-    const type  = props.type
+      const messageType  = props.type;
 
-    //Checking if message has emotes, if not skip this whole thing
-      const messageArray = props.messageSegments
+      const messageArray = props.message;
       var newMessageArray = [];
-
-      // console.log("message segments:", messageArray)
       
       messageArray.forEach((part) => {
         if (part.type === 'text') {
@@ -23,19 +19,9 @@ export function DisplayEmotes(props){
         } else return null
       })
 
-    const sanitizer = DOMPurify.sanitize
+    const sanitizer = DOMPurify.sanitize;
 
-    const random = randomColor({
-      luminosity: 'dark',
-      format: 'hex'
-   })
-
-    let newColor = props.color 
-
-    if (newColor === null) {
-      newColor = random;
-    }
-
+    let newColor = props.color;
     const correctedColor = useColorCorrection(newColor);
 
     const styles = (type) => {
@@ -64,5 +50,5 @@ export function DisplayEmotes(props){
     }
 
     //Re-printing the message with emotes embedded, probably not the best implementation but it works and I'm too dumb to make it better
-    return <span className="user-message" style= { styles(type) }><section dangerouslySetInnerHTML={{__html: sanitizer(newMessageArray.join(''))}}></section></span>
+    return <span className="user-message" style= { styles(messageType) }><section dangerouslySetInnerHTML={{__html: sanitizer(newMessageArray.join(''))}}></section></span>
 }

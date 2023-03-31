@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 export const CHANNEL_KEY = "channelBadges";
 export const DEFAULT_KEY = "defaultBadges";  
+export const USER_KEY = "channel";
 
 export function FetchBadges (channel) {  
   const CHANNEL_URL = `https://badges.twitch.tv/v1/badges/channels/${channel}/display?language=en`;
@@ -21,6 +22,7 @@ export function FetchBadges (channel) {
         useEffect(() =>{
            fetchData(CHANNEL_URL, CHANNEL_KEY);
            fetchData(DEFAULT_URL, DEFAULT_KEY);
-        }, [CHANNEL_URL, DEFAULT_URL])
+           localStorage.setItem(USER_KEY,channel)
+        }, [CHANNEL_URL, DEFAULT_URL, channel])
 
       }

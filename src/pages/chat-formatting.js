@@ -57,10 +57,8 @@ export function DisplayChat() {
            </section>
             <DisplayEmotes 
               emotes={message.emotes} 
-              message={message.text} 
-              messageSegments={message.messageSegments} 
+              message={message.message} 
               type={message.type}
-              announcementColor={message.announcementColor}
               color={message.color}/>
           </div>
         ))}

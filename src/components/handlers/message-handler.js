@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Component } from 'react';
 import { chatClient } from '../api-requests/twurple-client';
 
 export function useMessages() {
@@ -24,10 +24,9 @@ export function useMessages() {
                         color: msg.userInfo.color,
 
                         id: msg.id,
-                        text: text,
+                        message: msg.parseEmotes(),
                         emotes: msg.emoteOffsets,
 
-                        messageSegments: msg.parseEmotes(),
                                 
                         type: "chat",
                         raw: msg,
@@ -55,10 +54,9 @@ export function useMessages() {
                         color: msg.userInfo.color,
 
                         id: msg.id,
-                        text: text,
+                        message: msg.parseEmotes(),
                         emotes: msg.emoteOffsets,
 
-                        messageSegments: msg.parseEmotes(),
                                 
                         type: "action",
                         raw: msg,
@@ -83,10 +81,9 @@ export function useMessages() {
                         color: msg.userInfo.color,
 
                         id: msg.id,
-                        text: msg.message,
+                        message: msg.parseEmotes(),
                         emotes: msg.emoteOffsets,
 
-                        messageSegments: msg.parseEmotes(),
                                 
                         type: "announcement",
                         raw: msg,
@@ -113,9 +110,9 @@ export function useMessages() {
 
                         id: msg.id,
                         text: ChatSubInfo.message,
+                        message: msg.parseEmotes(),
                         emotes: msg.emoteOffsets,
 
-                        messageSegments: msg.parseEmotes(),
                                 
                         type: "subscription",
                         raw: msg,
