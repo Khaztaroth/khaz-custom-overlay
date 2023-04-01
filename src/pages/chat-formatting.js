@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { DisplayBadges } from "../components/message-parts/format-badges.js";
 import { DisplayEmotes } from "../components/message-parts/format-message";
 import { DisplayName } from "../components/message-parts/format-name";
+import { DisplayPronouns } from "../components/message-parts/format-pronouns.js";
 
 import { useMessages } from "../components/handlers/message-handler";
 
@@ -49,7 +50,8 @@ export function DisplayChat() {
         {messages.map((message, index) => (
           <div key={index} className="message" style={MessageBG(message.type)}>
            <section>
-           <DisplayBadges badges={message.badges} id={message.channelId} channel={message.channel}/>
+            <DisplayBadges badges={message.badges} id={message.channelId} channel={message.channel}/>
+            <DisplayPronouns user={message.username}/>
             <DisplayName
               user={message.username}
               color={message.color}
