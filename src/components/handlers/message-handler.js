@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, Component } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { chatClient } from '../api-requests/twurple-client';
 
 export function useMessages() {
