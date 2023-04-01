@@ -1,7 +1,6 @@
 ::-webkit-scrollbar{
     display: none;
 }
-
 .chat {
     overflow-y: scroll;
     height: 98.5vh;
@@ -10,9 +9,7 @@
 
 @media (max-width: 900px) {
     img {
-        width: 1rem;
         vertical-align: middle;
-        margin-bottom: 5px;
     }
 
     .message {
@@ -23,23 +20,41 @@
         width: 96%;
         margin: 0.3rem;
         padding: 0.35rem;
-        /* background-color: rgba(32, 32, 32, 0.904); */
         border: 10%;
         border-radius: 8px;
     }
-    .message img {
-        width: 2.2rem;
+    .badges img {
+        width: 2.3rem;
         padding-right: 0.3rem;
+
     }
     .user-message img {
-        width: 1.5em;
+        width: 1.4em;
+    }
+    .user-pronouns {
+        color: white;
+        font-size: 1.5rem;
+        vertical-align: middle;
+
+        border-color: white;
+        border-style: solid;
+        border-radius: 0.6rem 0.2rem;
+
+        background-color: green;
+
+        padding-left: 0.1rem;
+        padding-right: 0.5rem;
+        
+        margin-right: 0.2rem;
+        margin-left: 0.2rem;
+    }
+    .user-name{
+        vertical-align: middle;
     }
 }
 @media (min-width: 901px) {
     img {
-        width: 1rem;
         vertical-align: middle;
-        margin-bottom: 5px;
     }
 
     .message {
@@ -54,12 +69,28 @@
         border: 10%;
         border-radius: 8px;
     }
-    .message img {
-        width: 1.2rem;
+    .badges img {
+        width: 1.8rem;
         padding-right: 0.3rem;
     }
     .user-message img {
         width: 1.5em;
+    }
+    .user-pronouns {
+        color: white;
+        font-size: 1.3rem;
+
+        border-color: white;
+        border-style: solid;
+        border-radius: 0.6rem 0.2rem;
+
+        background-color: green;
+
+        padding-left: 0.1rem;
+        padding-right: 0.5rem;
+
+        margin-right: 0.2rem;
+        margin-left: 0.2rem;
     }
 }
 .user-name{
