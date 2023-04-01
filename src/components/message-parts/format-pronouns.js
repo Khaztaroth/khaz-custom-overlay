@@ -4,10 +4,8 @@ export function DisplayPronouns(props) {
 
     var pronouns
     const userPronouns = FetchUserPronouns(props.user)
-
     
     if (userPronouns) {
-        console.log(`user: ${props.user} pronouns:`, userPronouns.pronoun_id)
         pronouns = userPronouns.pronoun_id
     } else pronouns = ""
     
