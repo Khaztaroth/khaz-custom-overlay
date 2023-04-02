@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DisplayChat } from "../chat-formatting";
+import { DisplayChat } from "../chat-formatter";
 
 //sets up a url search in the current domain
 const params = new URLSearchParams(window.location.search)

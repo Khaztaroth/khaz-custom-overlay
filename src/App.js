@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import ArtOverlay from './pages/segments/overlay_art';
 import GamesOverlay from './pages/segments/overlay_games';
 import Home from './pages/segments/home';
-import Chat from './pages/segments/standalone-chat';
+import Chat from './pages/segments/standalone_chat';
 
 import "./pages/css/gradients.css"
 import "./pages/css/blocks.css"

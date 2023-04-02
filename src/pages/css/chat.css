@@ -65,13 +65,13 @@
         width: 96%;
         margin: 0.3rem;
         padding: 0.35rem;
-        /* background-color: rgba(32, 32, 32, 0.904); */
         border: 10%;
         border-radius: 8px;
     }
     .badges img {
-        width: 1.8rem;
+        width: 1.5rem;
         padding-right: 0.3rem;
+        padding-bottom: 0.3rem;
     }
     .user-message img {
         width: 1.5em;

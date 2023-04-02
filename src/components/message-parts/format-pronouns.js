@@ -1,10 +1,10 @@
 import { FetchUserPronouns } from "../api-requests/pronouns-fetcher"
 
-export function DisplayPronouns(props) {
+export function DisplayPronouns({user}) {
 
     var pronouns
-    const userPronouns = FetchUserPronouns(props.user)
-    
+    const userPronouns = FetchUserPronouns(user)
+
     if (userPronouns) {
         pronouns = userPronouns.pronoun_id
     } else pronouns = ""
@@ -25,6 +25,8 @@ export function DisplayPronouns(props) {
             } 
             case "hethey": { return ("He/they")
             } 
+            case "hethem": { return ("He/them")
+            } 
             case "itits": { return ("It/its")
             } 
             case "other": { return ("Other")
@@ -34,6 +36,8 @@ export function DisplayPronouns(props) {
             case "sheher": { return ("She/her")
             } 
             case "shethey": { return ("She/they")
+            } 
+            case "shethem": { return ("She/them")
             } 
             case "theythem": { return ("They/them")
             } 

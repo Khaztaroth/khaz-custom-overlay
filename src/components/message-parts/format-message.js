@@ -1,16 +1,21 @@
 import DOMPurify from "dompurify";
 import { useColorCorrection } from "../hook/color-correction";
 
-export function DisplayEmotes(props){
+export function DisplayEmotes({type, message, color}){
     //Checking if message type is an action, for formatting reasons
-      const messageType  = props.type;
+      const messageType  = type;
 
-      const messageArray = props.message;
+      const messageArray = message;
       var newMessageArray = [];
       
       messageArray.forEach((part) => {
+        console.log("message:", part)
         if (part.type === 'text') {
-          newMessageArray.push(part.text)
+            if (part.text === 'D:') {
+              const deecolonUrl = `https://cdn.betterttv.net/emote/55028cd2135896936880fdd7/3x.webp`
+              const deecolonImg = `<img src=${deecolonUrl} alt="D:" />`
+              newMessageArray.push(deecolonImg)
+            } else newMessageArray.push(part.text)
         } else if (part.type === 'emote'){
           const id = part.id
           const emoteUrl = `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/light/2.0`
@@ -21,7 +26,7 @@ export function DisplayEmotes(props){
 
     const sanitizer = DOMPurify.sanitize;
 
-    let newColor = props.color;
+    let newColor = color;
     const correctedColor = useColorCorrection(newColor);
 
     const styles = (type) => {

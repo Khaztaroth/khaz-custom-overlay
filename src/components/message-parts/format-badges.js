@@ -1,26 +1,26 @@
 import DOMPurify from "dompurify";
 import { CHANNEL_KEY, DEFAULT_KEY, USER_KEY, FetchBadges } from "../api-requests/badge-fetcher";
-import { RenderBadge } from "../hook/badge-rendered";
+import { RenderBadge } from "../hook/badge-renderer";
 
-export function DisplayBadges(props) {
+export function DisplayBadges({id, badges}) {
 
   const channel = localStorage.getItem(USER_KEY);
   const cachedChannelBadges = JSON.parse(localStorage.getItem(CHANNEL_KEY));
   const cachedDefaultBadges = JSON.parse(localStorage.getItem(DEFAULT_KEY));
   
-  var badges = [];
+  var currentBadges = [];
 
-  if (channel !== props.id || cachedChannelBadges == null || cachedDefaultBadges == null) {
-    FetchBadges(props.id);
+  if (channel !== id || cachedChannelBadges == null || cachedDefaultBadges == null) {
+    FetchBadges(id);
   } else {
-    badges.push(cachedChannelBadges.badge_sets, cachedDefaultBadges.badge_sets)
+    currentBadges.push(cachedChannelBadges.badge_sets, cachedDefaultBadges.badge_sets)
   }
 
-  const userBadges = props.badges
+  const userBadges = badges
 
     var img = []
     userBadges.forEach((key, value) => {
-        const badge = RenderBadge(value, key, badges);  
+        const badge = RenderBadge(value, key, currentBadges);  
         img.push(badge)
         }
       );

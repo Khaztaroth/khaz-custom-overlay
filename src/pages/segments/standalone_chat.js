@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../css/chat.css'
 
-import { DisplayChat } from '../chat-formatting';
+import { DisplayChat } from '../chat-formatter';
 function Chat() {
     
     return (

@@ -17,7 +17,7 @@ export function FetchUserPronouns (user) {
     
     useEffect(() => {
         fetchUserPronouns(URL)
-    }, [])
+    }, [URL])
 
     return pronounsData
 }
