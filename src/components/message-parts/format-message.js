@@ -9,7 +9,6 @@ export function DisplayEmotes({type, message, color}){
       var newMessageArray = [];
       
       messageArray.forEach((part) => {
-        console.log("message:", part)
         if (part.type === 'text') {
             if (part.text === 'D:') {
               const deecolonUrl = `https://cdn.betterttv.net/emote/55028cd2135896936880fdd7/3x.webp`
