@@ -51,9 +51,9 @@ export function DisplayChat() {
                 badges={message.badges} 
                 id={message.channelId} 
               />
-            <DisplayPronouns 
-                user={message.username}
-              />
+             <DisplayPronouns 
+                 user={message.username}
+               />
             <DisplayName
               user={message.username}
               color={message.color}

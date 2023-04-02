@@ -54,5 +54,5 @@ export function DisplayEmotes({type, message, color}){
     }
 
     //Re-printing the message with emotes embedded, probably not the best implementation but it works and I'm too dumb to make it better
-    return <span className="user-message" style= { styles(messageType) }><section dangerouslySetInnerHTML={{__html: sanitizer(newMessageArray.join(''))}}></section></span>
+    return <div className="user-message" style= { styles(messageType) } dangerouslySetInnerHTML={{__html: sanitizer(newMessageArray.join(''))}}></div>
 }

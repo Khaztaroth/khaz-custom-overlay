@@ -58,7 +58,7 @@
     }
 
     .message {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         word-wrap: break-word;
         word-break: break-word;
     
@@ -69,20 +69,19 @@
         border-radius: 8px;
     }
     .badges img {
-        width: 1.5rem;
+        width: 1.3rem;
         padding-right: 0.3rem;
-        padding-bottom: 0.3rem;
     }
     .user-message img {
-        width: 1.5em;
+        width: 1.2em;
     }
     .user-pronouns {
         color: white;
-        font-size: 1.3rem;
+        font-size: 0.7rem;
 
         border-color: white;
         border-style: solid;
-        border-radius: 0.6rem 0.2rem;
+        border-radius: 0.4rem 0.2rem;
 
         background-color: green;
 
@@ -94,6 +93,8 @@
     }
 }
 .user-name{
+    font-size: 1rem;
+    vertical-align:  baseline;
     mix-blend-mode: lighten;
 }
 .user-message {
