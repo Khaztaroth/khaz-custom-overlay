@@ -14,4 +14,4 @@ import { ChatClient } from "@twurple/chat";
 
     export const chatClient = new ChatClient({channels: [channel] });
 
-    export const apiClient = new ApiClient({authProvider});
+    // export const apiClient = new ApiClient({authProvider});

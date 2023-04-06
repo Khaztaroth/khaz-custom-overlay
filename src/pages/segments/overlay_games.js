@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from "react";
 // import { UseSubscriptions } from "../../api-requests/subscription-handler";
-import { DisplayChat } from "../chat-formatter";
+import { DisplayChat } from "../chat-formatter"
 
 // import './css/games_overlay.css'
 

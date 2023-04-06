@@ -1,12 +1,12 @@
-import { useRef } from 'react';
+import { useState } from 'react';
 
 export function useColorCorrection (color) {
     var convert = require('color-convert');
     var randomColor = require('randomcolor')
 
-    const createdColor = useRef(randomColor({luminosity: 'light'}))
+    const createdColor = useState(randomColor({luminosity: 'light'}))
 
-    let uglyColor = color || createdColor.current;
+    let uglyColor = color || createdColor;
 
     const hsv = convert.hex.hsv(uglyColor);
 
