@@ -148,5 +148,7 @@ export function useMessages() {
             
     },[])
 
+        console.log("messages:", messages)
+
         return messages
 };

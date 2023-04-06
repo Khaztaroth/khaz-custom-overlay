@@ -4,9 +4,6 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "@twurple/api": "^6.0.9",
     "@twurple/auth": "^6.0.9",
     "@twurple/chat": "^6.0.9",
@@ -24,8 +21,6 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
-    "tmi.js": "^1.8.5",
-    "twurple": "^1.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
