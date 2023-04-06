@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from "react";
 // import { UseSubscriptions } from "../../api-requests/subscription-handler";
-import { DisplayChat } from "../chat-formatter"
+import Chat from "./chat"
 
 // import './css/games_overlay.css'
 
@@ -40,7 +40,7 @@ if (chat === 'false') {
             <div id='overlayBlock' className={frameStyle}>
             
             <div id="leftside" className={frameStyle}>
-                <div id="chatBox" className={frameStyle}>{showChat? <DisplayChat /> : ""}</div>
+                <div id="chatBox" className={frameStyle}>{showChat? <Chat /> : ""}</div>
                 <div id="webcam" className={frameStyle}>
            </div>
             </div>

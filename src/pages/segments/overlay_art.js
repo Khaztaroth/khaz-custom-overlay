@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DisplayChat } from "../chat-formatter";
+import Chat from "./chat";
 
 //sets up a url search in the current domain
 const params = new URLSearchParams(window.location.search)
@@ -20,7 +20,7 @@ function ArtOverlay() {
             <div id='overlayBlock' className='block'>
             
             <div id="leftside" className="default">
-                <div id="chatBox" className="default" >{showChat ? <DisplayChat /> : ""}</div>
+                <div id="chatBox" className="default" >{showChat ? <Chat /> : ""}</div>
                 <div id="webcam" className="default">
            </div>
             </div>
