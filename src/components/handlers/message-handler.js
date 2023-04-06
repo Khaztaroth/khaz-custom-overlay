@@ -6,7 +6,6 @@ export function useMessages() {
     const messagesRef = useRef([]);
     
     useEffect(() => {
-        chatClient.connect();
 
          chatClient.onMessage((channel, user, text, msg) => {
             // console.log("raw:", msg)
