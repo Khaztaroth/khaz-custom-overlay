@@ -6,6 +6,7 @@ export function useMessages() {
     const messagesRef = useRef([]);
     
     useEffect(() => {
+
          chatClient.onMessage((channel, user, text, msg) => {
             const newMessage = {
                 currentChannel: channel,
@@ -88,6 +89,34 @@ export function useMessages() {
             }
         })
 
+        chatClient.onSub((channel, user, ChatSubInfo, msg) => {
+            if (!messagesRef.current.includes(msg.id)) {
+                messagesRef.current.push(msg.id);
+                setMessages((prevMessages) => {
+                    const newMessage = {
+                        channel: channel,
+                        channelId: msg.channelId,
+
+                        username: ChatSubInfo.displayName,
+                        userId: msg.userInfo.userId,
+                        badges: msg.userInfo.badges,
+                        color: msg.userInfo.color,
+
+                        id: msg.id,
+                        text: ChatSubInfo.message,
+                        message: msg.parseEmotes(),
+                        emotes: msg.emoteOffsets,
+
+                                
+                        type: "subscription",
+                        raw: msg,
+
+                    }; 
+                    const slicedArray = [...prevMessages.slice(-19), newMessage]
+                    return slicedArray
+                });
+            }
+        })
         chatClient.onSub((channel, user, ChatSubInfo, msg) => {
             const newMessage = {
                 currentChannel: channel,
