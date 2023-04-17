@@ -28,6 +28,6 @@ export function DisplayBadges({id, badges}) {
   const sanitizer = DOMPurify.sanitize
 
   return (
-      <span className='badges' dangerouslySetInnerHTML={{__html: sanitizer(img.join(''))}}></span>
+      <div className='badges' dangerouslySetInnerHTML={{__html: sanitizer(img.join(''))}} style={{display:"inline"}}></div>
   )
 }

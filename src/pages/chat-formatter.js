@@ -1,83 +1,59 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { DisplayBadges, DisplayEmotes, DisplayName, DisplayPronouns } from "../components/message-parts";
+import { DisplayBadges, DisplayMessage, DisplayName, DisplayPronouns } from "../components/message-parts";
 import { useMessages } from "../components/handlers/message-handler.js";
+import { MessageBG } from "./style/message-style";
 
 //Chat renderer
 export function DisplayChat() {
 
     //getting messages from the TMI library
     const messages = useMessages();
+    
+    //Defining an array state variable to hold the rendered elements
+    const [renderedMessage, setRenderedMessage] = useState([]);
+
+    //Defining an effect that will update the state variable whenever there is a change in the messages array
+    useEffect(() => {
+        const elements = messages.map((message, index) => (
+            <div key={index} className="message" style={MessageBG(message.type)}>
+                <DisplayBadges 
+                    badges={message.badges} 
+                    id={message.channelId} 
+                />
+                <DisplayPronouns 
+                    user={message.username}
+                />
+                <DisplayName
+                    user={message.username}
+                    color={message.color}
+                />
+                <DisplayMessage 
+                    message={message.message} 
+                    type={message.type}
+                    color={message.color}
+                    user={message.username}
+                />
+            </div>
+        ));
+        setRenderedMessage(elements.slice(-19));
+    }, [messages]);
 
     //Defining an effect that will scroll to the latest message
     const messagesEndRef = useRef(null);
     useEffect(() => {
-      const container = messagesEndRef.current;
-      const shouldScroll =
-        container.scrollHeight > container.clientHeight + container.scrollTop;
-      if (shouldScroll) {
-        container.scrollTop = container.scrollHeight;
-      }
+        const container = messagesEndRef.current;
+        const shouldScroll =
+            container.scrollHeight > container.clientHeight + container.scrollTop;
+        if (shouldScroll) {
+            container.scrollTop = container.scrollHeight;
+        }
     }, [messages]);
 
-    const MessageBG = (type) => {
-      switch(type) {
-        case 'chat': return {
-          backgroundColor: `rgba(32, 32, 32, 0.904)`
-        }
-        case 'action': return {
-          backgroundColor: `rgba(32, 32, 32, 0.904)`
-        }
-        case 'announcement': return {
-          backgroundColor: `rgba(32, 32, 32, 0.99)`,
-          border: `0.15rem solid grey`
-        }
-        case 'subscription': return {
-          backgroundColor: `rgba(32, 32, 32, 0.99)`,
-          border: `0.15rem solid grey`
-        }
-        default: return {
-          backgroundColor: `rgba(32, 32, 32, 0.904)`
-        }
-      }
-    }
-    //Message formatter, each element handles its segment through prop calls
+    //Rendering the finalized elements
     return (
-      <div
-        className="chatContainer"
-        id="chatContainer"
-        ref={messagesEndRef}
-      >
-        {messages.map((message, index) => {if (message.type === "subscription") return (
-          <div key={index} className="message" style={MessageBG(message.type)}>
-          <div style={{color: "white", fontWeight: "bold", textAlign:"end"}}>
-            {`${message.username} just subscribed!`}
-          </div>
-          </div>
-        ); else return (
-          <div key={index} className="message" style={MessageBG(message.type)}>
-           <section>
-            <DisplayBadges 
-                badges={message.badges} 
-                id={message.channelId} 
-              />
-             <DisplayPronouns 
-                 user={message.username}
-               />
-            <DisplayName
-              user={message.username}
-              color={message.color}
-            />
-           </section>
-            <DisplayEmotes 
-              message={message.message} 
-              type={message.type}
-              color={message.color}
-              user={message.username}
-              />
-          </div>
-        )}
-        )}
-      </div>
+        <div className="chatContainer" id="chatContainer" ref={messagesEndRef}>
+            {renderedMessage}
+        </div>
     )
 }

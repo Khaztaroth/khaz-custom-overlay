@@ -29,7 +29,7 @@ export function useMessages() {
             if (!messagesRef.current.includes(msg.id)) {
                 messagesRef.current.push(msg.id);
                 setMessages((prevMessages) => {
-                    return [...prevMessages.slice(-19), newMessage]
+                    return [...prevMessages, newMessage]
                 });
             }
         })
@@ -57,7 +57,7 @@ export function useMessages() {
             if (!messagesRef.current.includes(msg.id)) {
                 messagesRef.current.push(msg.id);
                 setMessages((prevMessages) => {
-                    return [...prevMessages.slice(-19), newMessage]
+                    return [...prevMessages, newMessage]
                 });
             }
         });
@@ -84,65 +84,51 @@ export function useMessages() {
             if (!messagesRef.current.includes(msg.id)) {
                 messagesRef.current.push(msg.id);
                 setMessages((prevMessages) => {
-                    return [...prevMessages.slice(-19), newMessage]
+                    return [...prevMessages, newMessage]
                 });
             }
-        })
+        });
 
         chatClient.onSub((channel, user, ChatSubInfo, msg) => {
             if (!messagesRef.current.includes(msg.id)) {
                 messagesRef.current.push(msg.id);
-                setMessages((prevMessages) => {
-                    const newMessage = {
-                        channel: channel,
-                        channelId: msg.channelId,
-
-                        username: ChatSubInfo.displayName,
-                        userId: msg.userInfo.userId,
-                        badges: msg.userInfo.badges,
-                        color: msg.userInfo.color,
-
-                        id: msg.id,
-                        text: ChatSubInfo.message,
-                        message: msg.parseEmotes(),
-                        emotes: msg.emoteOffsets,
-
-                                
-                        type: "subscription",
-                        raw: msg,
-
-                    }; 
-                    const slicedArray = [...prevMessages.slice(-19), newMessage]
-                    return slicedArray
-                });
-            }
-        })
-        chatClient.onSub((channel, user, ChatSubInfo, msg) => {
-            const newMessage = {
-                currentChannel: channel,
-                channelId: msg.channelId,
-
-                username: msg.userInfo.displayName,
-                userId: msg.userInfo.userId,
-                badges: msg.userInfo.badges,
-                color: msg.userInfo.color,
-
-                id: msg.id,
-                message: msg.parseEmotes(),
-                emotes: msg.emoteOffsets,
-
-                        
-                type: "subscription",
-                raw: msg,
-
-            }; 
+    
+                const newMessage = {
+                    username: ChatSubInfo.displayName,
+                    color: msg.userInfo.color,
+                    badges: msg.userInfo.badges,
+                    
+                    id:msg.id,
+                    streak: ChatSubInfo.months,
+                    message: ChatSubInfo.message,
+    
+                    subType: "sub"
+                }
+                    setMessages((prevMessages) => {
+                        return [...prevMessages, newMessage]
+                    });
+            }}
+        );
+        chatClient.onResub((channel, user, ChatSubInfo, msg) => {
             if (!messagesRef.current.includes(msg.id)) {
                 messagesRef.current.push(msg.id);
-                setMessages((prevMessages) => {
-                    return [...prevMessages.slice(-19), newMessage]
-                });
-            }
-        })
+    
+                const newMessage = {
+                    username: ChatSubInfo.displayName,
+                    color: msg.userInfo.color,
+                    badges: msg.userInfo.badges,
+                    
+                    id:msg.id,
+                    streak: ChatSubInfo.months,
+                    message: ChatSubInfo.message,
+    
+                    subType: "sub"
+                }
+                    setMessages((prevMessages) => {
+                        return [...prevMessages, newMessage]
+                    });
+            }}
+        );
 
         chatClient.onMessageRemove((channel, messageId, msg) => {
             setMessages((prevMessages) => {

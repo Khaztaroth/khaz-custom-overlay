@@ -1,14 +1,8 @@
-import { useState } from 'react';
-
 export function useColorCorrection (color) {
-    var convert = require('color-convert');
-    var randomColor = require('randomcolor')
+    const convert = require('color-convert')
+    let ogColor = color;
 
-    const createdColor = useState(randomColor({luminosity: 'light'}))
-
-    let uglyColor = color || createdColor;
-
-    const hsv = convert.hex.hsv(uglyColor);
+    const hsv = convert.hex.hsv(ogColor);
 
     const useAdjustedColor = () => {
         const h = hsv[0]

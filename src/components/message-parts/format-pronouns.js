@@ -53,6 +53,6 @@ export function DisplayPronouns({user}) {
     }
 
     return (
-        <span className={pronouns? "user-pronouns" : ""}> {formatPronouns(pronouns)}</span>
+        <div className={pronouns? "user-pronouns" : ""} style={{width:"fit-content", display:"inline-block"}}>{formatPronouns(pronouns)}</div>
     )
 }

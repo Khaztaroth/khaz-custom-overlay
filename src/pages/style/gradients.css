@@ -1,0 +1,32 @@
+/* Gradient functions based on https://www.bram.us/2021/01/29/animating-a-css-gradient-border/ */
+
+
+:root {
+  --purple: #d457f3;
+  --orange: #f4b14f;
+  --angle: 0deg;
+
+  --green1:  rgb(0, 128, 0);
+  --green2: rgb(76, 245, 76);
+}
+body{
+  background-color: transparent;
+}  
+
+.frames {
+  animation: 10s rotate linear infinite;
+  transition-property: border-image;
+  transition-duration: 1s;
+}
+
+@keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+  
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }

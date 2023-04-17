@@ -78,14 +78,16 @@
     }
     .user-pronouns {
         color: white;
-        font-size: 0.7rem;
+        font-size: 0.9rem;
 
         border-color: white;
         border-style: solid;
+        border-width: 0.1rem;
         border-radius: 0.4rem 0.2rem;
 
         background-color: green;
 
+        text-transform: full-width;
         padding-left: 0.1rem;
         padding-right: 0.5rem;
 

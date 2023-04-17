@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useColorCorrection } from "../hook/color-correction"
 
 export function DisplayName({color, user}) {
+    var randomColor = require('randomcolor')
 
+    const createdColor = useRef(randomColor({luminosity: 'light'}))
     //Setting color as the same TMI gives in case the user already has one
-    var newColor = color 
+    var newColor
+
+    if (!color) {
+        newColor = createdColor.current
+    } else {
+        newColor = color
+    }
 
     const [correctedColor, setCorrectedColor] = useState(newColor);
     const colorcorrector = useColorCorrection(newColor);

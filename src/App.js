@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import {Home, ArtOverlay, GamesOverlay, Chat} from './pages/segments'
 import { chatClient } from './components/api-requests/twurple-client';
 
-import "./pages/css/gradients.css"
-import "./pages/css/blocks.css"
+import "./pages/style/gradients.css"
+import "./pages/style/blocks.css"
 
 chatClient.connect();
 

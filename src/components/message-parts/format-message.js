@@ -1,7 +1,7 @@
 import DOMPurify from "dompurify";
 import { useColorCorrection } from "../hook/color-correction";
 
-export function DisplayEmotes({type, message, color, user}){
+export function DisplayMessage({type, message, color, user}){
     //Checking if message type is an action, for formatting reasons
       const messageType  = type;
 
