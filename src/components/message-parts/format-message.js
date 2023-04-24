@@ -45,6 +45,12 @@ export function DisplayMessage({type, message, color, user}){
           fontStyle: 'italic',
           fontWeight: 'bold',
         }
+        case 'sub': return {
+          color: "white",
+          fontStyle: 'italic',
+          fontWeight: 'bold',
+          content: `${user} just subscribed`
+        }
         default: return {
           color: 'white',
           fontStyle: 'normal',

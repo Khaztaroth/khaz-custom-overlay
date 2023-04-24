@@ -1,9 +1,16 @@
 ::-webkit-scrollbar{
     display: none;
 }
-.chat {
+.standaloneChat {
     overflow-y: scroll;
-    height: 98.5vh;
+    height: 98vh;
+    padding-right: 5px;
+    z-index: 1;
+}
+.overlayChat {
+    overflow-y: scroll;
+    height: 72vh;
+    padding-right: 5px;
     z-index: 1;
 }
 
@@ -17,7 +24,7 @@
         word-wrap: break-word;
         word-break: break-word;
     
-        width: 96%;
+        width: 100%;
         margin: 0.3rem;
         padding: 0.35rem;
         border: 10%;

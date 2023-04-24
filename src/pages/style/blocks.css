@@ -1,5 +1,5 @@
 #overlayBlock {
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     height: 98%;
     width: 100%;
@@ -16,22 +16,14 @@
     border-right: 1vmin solid;
 }
 
-#chatContainer {
-    overflow-y: scroll;
-    height: 98%;
-    width: 98%;
-    padding-right: 20px;
-    z-index: 1;
-
-}
 #chatBox {
     position: relative;
     display: inline-block;
     vertical-align: middle;
     height: 72vh;
-    width: 98%;
+    width: auto;
 
-    z-index: 0;
+    z-index: 1;
 }
 
 #webcam {
@@ -41,7 +33,7 @@
 
     border-top: 1vmin solid;
 
-    z-index: 0;
+    z-index: 1;
 }
 #rightside {
     border-right: 1vmin solid;
@@ -55,12 +47,12 @@
 
     border-bottom: 1vmin solid;
 
-    z-index: 0;
+    z-index: 1;
 }
   
 #art_screen {
     display: inline-block;
     height: 96.9vh;
 
-    z-index: 0;
+    z-index: 1;
 }

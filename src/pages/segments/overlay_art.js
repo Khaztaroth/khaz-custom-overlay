@@ -2,6 +2,9 @@ import React from "react";
 
 import Chat from "./chat";
 
+import "../style/gradients.css"
+import "../style/blocks.css"
+
 //sets up a url search in the current domain
 const params = new URLSearchParams(window.location.search)
 

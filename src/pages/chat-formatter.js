@@ -36,7 +36,7 @@ export function DisplayChat() {
                 />
             </div>
         ));
-        setRenderedMessage(elements.slice(-19));
+        setRenderedMessage(elements.slice(-14));
     }, [messages]);
 
     //Defining an effect that will scroll to the latest message
@@ -48,12 +48,22 @@ export function DisplayChat() {
         if (shouldScroll) {
             container.scrollTop = container.scrollHeight;
         }
-    }, [messages]);
+    }, [renderedMessage]);
+
+    const params = window.location.pathname
+
+    var standalone = false
+
+    if (params === "/chat") {
+        standalone = true
+    }
 
     //Rendering the finalized elements
     return (
-        <div className="chatContainer" id="chatContainer" ref={messagesEndRef}>
+        <div>
+        <div className={standalone? 'standaloneChat' : 'overlayChat'} ref={messagesEndRef}>
             {renderedMessage}
+        </div>
         </div>
     )
 }
