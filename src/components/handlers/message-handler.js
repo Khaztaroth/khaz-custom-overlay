@@ -146,6 +146,14 @@ export function useMessages() {
             });
         });
 
+        chatClient.onBan((channel, user, msg) => {
+            setMessages((prevMessages) => {
+                return prevMessages.filter((usr) => {
+                    return usr.userId !== msg.targetUserId
+                })
+            })
+        })
+
         chatClient.onChatClear((channel, msg) => {
             setMessages((prevMessages) => {
                 return prevMessages = []
