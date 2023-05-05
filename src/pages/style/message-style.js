@@ -19,3 +19,34 @@ export  const MessageBG = (type) => {
       }
     }
   }
+
+export const MessageStyles = (type, user, color) => {
+  switch(type) {
+    case 'chat': return {
+      color: 'white',
+      fontStyle: 'normal',
+      fontWeight: 'bold',
+      }
+    case 'action': return {
+      color: color,
+      fontStyle: 'italic',
+      fontWeight: 'bold',
+      }
+    case 'announcement': return {
+      color: "white",
+      fontStyle: 'italic',
+      fontWeight: 'bold',
+    }
+    case 'sub': return {
+      color: "white",
+      fontStyle: 'italic',
+      fontWeight: 'bold',
+      content: `${user} just subscribed`
+    }
+    default: return {
+      color: 'white',
+      fontStyle: 'normal',
+      fontWeight: 'bold',
+    }
+  }
+}

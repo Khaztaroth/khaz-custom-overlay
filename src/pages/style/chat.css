@@ -1,6 +1,7 @@
 ::-webkit-scrollbar{
     display: none;
 }
+
 .standaloneChat {
     overflow-y: scroll;
     height: 98vh;
@@ -14,41 +15,38 @@
     z-index: 1;
 }
 
-@media (max-width: 900px) {
-    img {
-        vertical-align: middle;
-    }
+img {
+    vertical-align: middle;
+}
 
-    .message {
-        font-size: 2.5rem;
-        word-wrap: break-word;
-        word-break: break-word;
-    
-        width: 98%;
-        margin: 0.3rem;
-        padding: 0.35rem;
-        border: 10%;
-        border-radius: 16px;
-    }
+.user-pronouns {
+    color: white;
+    vertical-align: middle;
+    border-color: white;
+    border-style: solid;
+    background-color: green;
+}
+.user-name{
+    vertical-align:  baseline;
+    mix-blend-mode: lighten;
+}
+.message {
+
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+@media (max-width: 900px) {
     .badges img {
         width: 2.3rem;
         padding-right: 0.3rem;
-
-    }
-    .user-message img {
-        width: 1.4em;
+    
     }
     .user-pronouns {
-        color: white;
         font-size: 1.5rem;
-        vertical-align: middle;
-
-        border-color: white;
-        border-style: solid;
         border-radius: 0.6rem 0.2rem;
-
-        background-color: green;
-
+        
+        
         padding-left: 0.1rem;
         padding-right: 0.5rem;
         
@@ -59,56 +57,49 @@
         font-size: 2.3rem;
         vertical-align: middle;
     }
+    .message {
+        font-size: 2.5rem;
+        
+        width: calc(100% - 40px);
+        margin: calc(1rem - 8px);
+        padding: calc(1rem - 4px);
+        border: 10%;
+        border-radius: 16px;
+    }
+    .user-message img {
+        width: 1.4em;
+    }
 }
 @media (min-width: 901px) {
-    img {
-        vertical-align: middle;
-    }
-
-    .message {
-        font-size: 1.2rem;
-        word-wrap: break-word;
-        word-break: break-word;
-    
-        width: 96%;
-        margin: 0.3rem;
-        padding: 0.35rem;
-        border: 10%;
-        border-radius: 8px;
-    }
     .badges img {
         width: 1.3rem;
         padding-right: 0.3rem;
     }
-    .user-message img {
-        width: 1.2em;
-    }
     .user-pronouns {
-        color: white;
         font-size: 0.9rem;
-
-        border-color: white;
-        border-style: solid;
+        
         border-width: 0.1rem;
         border-radius: 0.4rem 0.2rem;
-
-        background-color: green;
-
-        text-transform: full-width;
+        
         padding-left: 0.1rem;
         padding-right: 0.5rem;
-
+        
         margin-right: 0.2rem;
         margin-left: 0.2rem;
     }
     .user-name{
         font-size: 1.15rem;
     }
-}
-.user-name{
-    vertical-align:  baseline;
-    mix-blend-mode: lighten;
-}
-.user-message {
-    color: rgb(255, 255, 255);
+    .message {
+        font-size: 1.2rem;
+        
+        width: calc(100% - 30px);
+        margin: calc(1rem - 8px);
+        padding: calc(1rem - 4px);
+        border: 10%;
+        border-radius: 8px;
+    }
+    .user-message img {
+        width: 1.2em;
+    }
 }

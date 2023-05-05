@@ -1,5 +1,6 @@
 import DOMPurify from "dompurify";
 import { useColorCorrection } from "../hook/color-correction";
+import { MessageStyles } from "../../pages/style/message-style";
 
 export function DisplayMessage({type, message, color, user}){
     //Checking if message type is an action, for formatting reasons
@@ -28,37 +29,6 @@ export function DisplayMessage({type, message, color, user}){
     let newColor = color;
     const correctedColor = useColorCorrection(newColor);
 
-    const styles = (type) => {
-      switch(type) {
-        case 'chat': return {
-          color: 'white',
-          fontStyle: 'normal',
-          fontWeight: 'bold',
-          }
-        case 'action': return {
-          color: correctedColor,
-          fontStyle: 'italic',
-          fontWeight: 'bold',
-          }
-        case 'announcement': return {
-          color: "white",
-          fontStyle: 'italic',
-          fontWeight: 'bold',
-        }
-        case 'sub': return {
-          color: "white",
-          fontStyle: 'italic',
-          fontWeight: 'bold',
-          content: `${user} just subscribed`
-        }
-        default: return {
-          color: 'white',
-          fontStyle: 'normal',
-          fontWeight: 'bold',
-        }
-      }
-    }
-
     //Re-printing the message with emotes embedded, probably not the best implementation but it works and I'm too dumb to make it better
-    return <div className="user-message" style= { styles(messageType) } dangerouslySetInnerHTML={{__html: sanitizer(newMessageArray.join(''))}}></div>
+    return <div className="user-message" style= { MessageStyles(messageType, user, correctedColor) } dangerouslySetInnerHTML={{__html: sanitizer(newMessageArray.join(''))}}></div>
 }
