@@ -5,7 +5,7 @@ export function DisplayName({color, user}) {
     var randomColor = require('randomcolor')
 
     const createdColor = useRef(randomColor({luminosity: 'light'}))
-    //Setting color as the same TMI gives in case the user already has one
+    //Setting color as the same Twitch provides in case the user already has one
     var newColor
 
     if (!color) {

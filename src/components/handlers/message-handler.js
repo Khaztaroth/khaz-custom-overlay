@@ -89,47 +89,6 @@ export function useMessages() {
             }
         });
 
-        // chatClient.onSub((channel, user, ChatSubInfo, msg) => {
-        //     if (!messagesRef.current.includes(msg.id)) {
-        //         messagesRef.current.push(msg.id);
-    
-        //         const newMessage = {
-        //             username: ChatSubInfo.displayName,
-        //             color: msg.userInfo.color,
-        //             badges: msg.userInfo.badges,
-                    
-        //             id:msg.id,
-        //             streak: ChatSubInfo.months,
-        //             message: msg.message.parseEmotes(),
-    
-        //             subType: "sub"
-        //         }
-        //             setMessages((prevMessages) => {
-        //                 return [...prevMessages, newMessage]
-        //             });
-        //     }}
-        // );
-        // chatClient.onResub((channel, user, ChatSubInfo, msg) => {
-        //     if (!messagesRef.current.includes(msg.id)) {
-        //         messagesRef.current.push(msg.id);
-    
-        //         const newMessage = {
-        //             username: ChatSubInfo.displayName,
-        //             color: msg.userInfo.color,
-        //             badges: msg.userInfo.badges,
-                    
-        //             id:msg.id,
-        //             streak: ChatSubInfo.months,
-        //             message: msg.message.parseEmotes(),
-    
-        //             subType: "sub"
-        //         }
-        //             setMessages((prevMessages) => {
-        //                 return [...prevMessages, newMessage]
-        //             });
-        //     }}
-        // );
-
         chatClient.onMessageRemove((channel, messageId, msg) => {
             setMessages((prevMessages) => {
                 return prevMessages.filter((msg) => {
